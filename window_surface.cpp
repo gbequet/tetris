@@ -4,4 +4,5 @@
 
 WindowSurface::WindowSurface()
 {
+    
 }
