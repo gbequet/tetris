@@ -40,7 +40,7 @@ void Game::init()
 	planche = new Surface();
 	ball = new Ball();
 
-	planche->setPlancheSprites("./sprites.bmp");
+	planche->setPlancheSprites("sprites.bmp");
 	// definit la couleur transparente
 	SDL_SetColorKey(planche->plancheSprites, true, 0);
 
@@ -53,7 +53,7 @@ void Game::init()
 
 void Game::keyboard(const Uint8* keys)
 {
-	if (keys[SDL_SCANCODE_SPACE])
+	/*if (keys[SDL_SCANCODE_SPACE])
 	{
 		int w, h;
 		SDL_GetWindowSize(win, &w, &h);
@@ -71,7 +71,7 @@ void Game::keyboard(const Uint8* keys)
 		ball->changeSpeedY(-0.2);
 
 	if (keys[SDL_SCANCODE_DOWN])
-		ball->changeSpeedY(0.2);
+		ball->changeSpeedY(0.2);*/
 }
 
 void Game::draw(double dt)

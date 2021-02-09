@@ -16,7 +16,7 @@ public:
     SDL_Surface *plancheSprites;
 
     // creation d'une "surface" à patir d'une image
-    void setPlancheSprites(std::string path);
+    void setPlancheSprites(const char* path);
 };
 
 #endif
