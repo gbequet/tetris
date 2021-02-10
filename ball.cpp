@@ -10,6 +10,26 @@ Ball::Ball()
     vy = 25;
 }
 
+double Ball::getPositionX()
+{
+    return x;
+}
+
+double Ball::getPositionY()
+{
+    return y;
+}
+
+double Ball::getSpeedVx()
+{
+    return vx;
+}
+
+double Ball::getSpeedVy()
+{
+    return vy;
+}
+
 void Ball::moveX(double u)
 {
     x += u;
