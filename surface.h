@@ -8,12 +8,15 @@ class Sprite;
 
 class Surface
 {
-    public:
-        Surface();
-        SDL_Surface* GetWindowSrf(SDL_Window* bon);
-        SDL_Surface* BMPLoad();
-        SDL_Surface* win_surf;
-        SDL_Surface* plancheSprites;
+public:
+    Surface();
+    Surface(const std::string &path);
+    SDL_Surface *GetWindowSrf(SDL_Window *bon);
+
+    void draw(const Sprite &spr, int x, int y);
+
+private:
+    SDL_Surface* surface_SDL;
 };
 
 #endif

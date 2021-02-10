@@ -63,16 +63,55 @@ void Game::init()
 
 void Game::keyboard(const Uint8* keys)
 {
-//	if (keys[SDL_SCANCODE_SPACE])
-	//
-//	if (keys[SDL_SCANCODE_UP])
-	//
-}
+	if (keys[SDL_SCANCODE_SPACE])
+	{
+		int w, h;
+		SDL_GetWindowSize(win, &w, &h);
+		ball->moveX(w/2);
+		ball->moveY(h/2);
+	}
 
+	if (keys[SDL_SCANCODE_LEFT])
+		ball->changeSpeedX(-0.2);
+
+	if (keys[SDL_SCANCODE_RIGHT])
+		ball->changeSpeedX(0.2);
+
+	if (keys[SDL_SCANCODE_UP])
+		ball->changeSpeedY(-0.2);
+
+	if (keys[SDL_SCANCODE_DOWN])
+		ball->changeSpeedY(0.2);
+}
 
 void Game::draw(double dt)
 {
+	// remplit le fond
+	SDL_Rect dest = {0, 0, 0, 0};
+	for (int j = 0; j < win_surf->h; j += 128)
+		for (int i = 0; i < win_surf->w; i += 96)
+		{
+			dest.x = i;
+			dest.y = j;
+			// copie depuis la planche de sprite vers la fenetre
+			SDL_BlitSurface(plancheSprites, &srcBg, win_surf, &dest);
+		}
 
+	// affiche balle
+	SDL_Rect dstBall = {int(ball.x), int(ball.y), 0, 0};
+	SDL_BlitSurface(plancheSprites, &srcBall, win_surf, &dstBall);
+
+	// deplacement (*dt pour vitesse constante)
+	ball.x += ball.vx * dt;
+	ball.y += ball.vy * dt;
+
+	// collision bord
+	int w, h;
+	SDL_GetWindowSize(pWindow, &w, &h);
+	if ((ball.x < 1) || (ball.x > (w - 25)))
+		ball.vx *= -1;
+	if ((ball.y < 1) || (ball.y > (h - 25)))
+		ball.vy *= -1;
 }
 
 void Game::loop()
