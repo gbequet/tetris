@@ -2,12 +2,9 @@
 #include <string>
 #include <iostream>
 
-Ball::Ball()
+Ball::Ball() : x(0), y(0), vx(40), vy(25)
 {
-    x = 0;
-    y = 0;
-    vx = 40;
-    vy = 25;
+    
 }
 
 double Ball::getPositionX()
