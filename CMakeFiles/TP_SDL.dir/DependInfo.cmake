@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/guillaume/Desktop/m1/s2/programmation-avancee-tetris/base_tp1.cpp" "/Users/guillaume/Desktop/m1/s2/programmation-avancee-tetris/CMakeFiles/TP_SDL.dir/base_tp1.cpp.o"
+  "/Users/florian/Desktop/prog_av_tp1-master/base_tp1.cpp" "/Users/florian/Desktop/prog_av_tp1-master/CMakeFiles/TP_SDL.dir/base_tp1.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "AppleClang")
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Preprocessor definitions for this target.
 set(CMAKE_TARGET_DEFINITIONS_CXX
@@ -15,7 +15,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/usr/local/Cellar/sdl2/2.0.12_1/include/SDL2"
+  "/usr/local/Cellar/sdl2/2.0.14_1/include/SDL2"
   )
 
 # Targets to which this target links.

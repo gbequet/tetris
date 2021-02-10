@@ -8,15 +8,12 @@ class Sprite;
 
 class Surface
 {
-
-public: 
-    Surface();
-
-    SDL_Surface *win_surf;
-    SDL_Surface *plancheSprites;
-
-    // creation d'une "surface" à patir d'une image
-    void setPlancheSprites(const char* path);
+    public:
+        Surface();
+        SDL_Surface* GetWindowSrf(SDL_Window* bon);
+        SDL_Surface* BMPLoad();
+        SDL_Surface* win_surf;
+        SDL_Surface* plancheSprites;
 };
 
 #endif

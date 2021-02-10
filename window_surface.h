@@ -9,12 +9,9 @@ class Sprite;
 
 class WindowSurface : public Surface
 {
-
-public:
-    WindowSurface();
-
-private:
-SDL_Window *pWindow;
+    public:
+    SDL_Window* CreateWin(SDL_Window* bon);
+    SDL_Window* pWindow;
 
 };
 

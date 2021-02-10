@@ -12,8 +12,7 @@ class Game
 {
 	WindowSurface* win;
 	Surface* planche;
-	Ball* ball;
-
+	Surface* surface1;
 
 	// + ?
 
@@ -37,42 +36,39 @@ public:
 void Game::init()
 {
 	win = new WindowSurface();
+	win->pWindow = NULL;
+	SDL_Window* winWindow;
+
+	surface1 = new Surface();
+	surface1->win_surf = NULL;
+	SDL_Surface* winSurface;
+	
 	planche = new Surface();
-	ball = new Ball();
+	planche->plancheSprites = NULL;
+	SDL_Surface* plancheSurface;
 
-	planche->setPlancheSprites("sprites.bmp");
-	// definit la couleur transparente
-	SDL_SetColorKey(planche->plancheSprites, true, 0);
+	winWindow = win->CreateWin(win->pWindow);
+	winSurface = surface1->GetWindowSrf(win->pWindow);
+	// creation d'une "surface" à patir d'une image
+	plancheSurface = planche->BMPLoad();
 
-	// place la balle au milieu
-	int w, h;
-	SDL_GetWindowSize(win, &w, &h);
-	ball->moveX(w/2);
-	ball->moveY(h/2);
+	// definit la souleur transparente
+	//SDL_SetColorKey(win->plancheSprites, true, 0);  // 0: 00/00/00 noir -> transparent
+
+	// place la balle u milieu
+	//int w, h;
+	//SDL_GetWindowSize(win->pWindow, &w, &h);
+	
 }
 
 void Game::keyboard(const Uint8* keys)
 {
-	/*if (keys[SDL_SCANCODE_SPACE])
-	{
-		int w, h;
-		SDL_GetWindowSize(win, &w, &h);
-		ball->moveX(w/2);
-		ball->moveY(h/2);
-	}
-
-	if (keys[SDL_SCANCODE_LEFT])
-		ball->changeSpeedX(-0.2);
-
-	if (keys[SDL_SCANCODE_RIGHT])
-		ball->changeSpeedX(0.2);
-
-	if (keys[SDL_SCANCODE_UP])
-		ball->changeSpeedY(-0.2);
-
-	if (keys[SDL_SCANCODE_DOWN])
-		ball->changeSpeedY(0.2);*/
+//	if (keys[SDL_SCANCODE_SPACE])
+	//
+//	if (keys[SDL_SCANCODE_UP])
+	//
 }
+
 
 void Game::draw(double dt)
 {
@@ -81,7 +77,27 @@ void Game::draw(double dt)
 
 void Game::loop()
 {
+	Uint64 prev, now = SDL_GetPerformanceCounter(); // timers
+	double delta_t;  // durée frame en ms
 
+	bool quit = false;
+	while (!quit)
+	{
+		SDL_Event event;
+		while (!quit && SDL_PollEvent(&event))
+		{
+			switch (event.type)
+			{
+			case SDL_QUIT:
+				quit = true;
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				printf("mouse click %d\n", event.button.button);
+				break;
+			default: break;
+			}
+		}
+	}
 }
 
 
@@ -95,7 +111,8 @@ int main(int argc, char** argv)
 	Game g;
 
 	g.init();
-	//g.loop();
+	g.loop();
 
+	SDL_Quit();
+	return 0;
 }
-

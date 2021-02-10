@@ -8,14 +8,7 @@
 class WindSurface;
 
 class Sprite
-{
-
-public:
-    Sprite();
-
-private:
-SDL_Rect srcBg;
-SDL_Rect srcBall;
+{ 
 
 };
 #endif

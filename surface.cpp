@@ -1,21 +1,16 @@
 #include "surface.h"
 #include <SDL.h>
-#include <string>
-#include <iostream>
-
-using namespace std;
-
 
 Surface::Surface() 
-{
+{}
 
+
+SDL_Surface* Surface::GetWindowSrf(SDL_Window* bon)
+{
+    return SDL_GetWindowSurface(bon);
 }
 
-void Surface::setPlancheSprites(const char* path) 
+SDL_Surface* Surface::BMPLoad()
 {
-    // erreur : ne reconnait pas SDL_LoadBMP meme quand on include <SDL.h>
-    
-    plancheSprites = SDL_LoadBMP(path);
+    return SDL_LoadBMP("./sprites.bmp");
 }
-
-
