@@ -7,22 +7,22 @@ Ball::Ball() : x(0), y(0), vx(40), vy(25)
     
 }
 
-double Ball::getPositionX()
+double Ball::getPositionX() const
 {
     return x;
 }
 
-double Ball::getPositionY()
+double Ball::getPositionY() const
 {
     return y;
 }
 
-double Ball::getSpeedVx()
+double Ball::getSpeedVx() const
 {
     return vx;
 }
 
-double Ball::getSpeedVy()
+double Ball::getSpeedVy() const
 {
     return vy;
 }
