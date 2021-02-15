@@ -9,13 +9,20 @@ class WindSurface;
 
 class Sprite
 {
+    friend class WindSurface;
+    friend class Surface;
+
+private:
+    SDL_Rect geom;
+    Surface* surf;
 
 public:
     Sprite();
+    Sprite(Surface *s, int x, int y, int w, int h);
 
-private:
-SDL_Rect srcBg;
-SDL_Rect srcBall;
-
+    SDL_Rect getGeom();
+    Surface* getSurf();
+    int width();
+    int height();
 };
 #endif

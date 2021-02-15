@@ -11,12 +11,13 @@ class Surface
 
 public: 
     Surface();
+    Surface(const char* path);
 
+    SDL_Surface *surface_sdl;
     SDL_Surface *win_surf;
-    SDL_Surface *plancheSprites;
 
     // creation d'une "surface" à patir d'une image
-    void setPlancheSprites(const char* path);
+    void draw(const Sprite &s, int x, int y);
 };
 
 #endif
