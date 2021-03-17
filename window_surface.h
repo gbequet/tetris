@@ -1,14 +1,14 @@
-#ifndef _WINDOW_
-#define _WINDOW_
+#ifndef _WINDOW_SURFACE_
+#define _WINDOW_SURFACE_
 
 #include <SDL.h>
 
 
 // Classe pour afficher la fênetre du jeu Tetris
-class Window
+class WindowSurface
 {
     public:
-        Window();
+        WindowSurface();
         void CreateWin();
         void WinSize();
         void WinSurface();

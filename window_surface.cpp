@@ -4,13 +4,13 @@ using namespace std;
 
 
 // Constructeur
-Window::Window() : pWindow(nullptr), win_surf(nullptr)
+WindowSurface::WindowSurface() : pWindow(nullptr), win_surf(nullptr)
 {
 }
 
 
 // Creation de la fenêtre du jeu
-void Window::CreateWin()
+void WindowSurface::CreateWin()
 {
     pWindow = SDL_CreateWindow("Projet Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
 }
@@ -18,14 +18,14 @@ void Window::CreateWin()
 
 // Prendre la taille de la fenêtre 
 // Utile ? On verra par la suite
-void Window::WinSize()
+void WindowSurface::WinSize()
 {
     SDL_GetWindowSize(pWindow, &width, &height);
 }
 
 
 // Taille de la surface du jeu
-void Window::WinSurface()
+void WindowSurface::WinSurface()
 {
     win_surf = SDL_GetWindowSurface(pWindow);
 }
