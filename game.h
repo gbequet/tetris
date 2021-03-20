@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <vector>
+#include <list>
 #include "ball.h"
 
 class Window;
@@ -31,6 +32,7 @@ private:
     Surface *planche_;
     std::vector<Sprite *> sprites_;
     std::vector<Ball> balls_;
+    std::list<std::vector<int>> presenceGrille_; // stock le nombre de cube sur chaque case de la grille
 };
 
 #endif

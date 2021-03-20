@@ -37,16 +37,24 @@ void Game::initialize()
     window_->initialize();
 
     planche_ = new Surface();
+    // const std::string image = "./sprites.bmp";
     const std::string image = "./sprites.bmp";
     planche_->load(image.c_str());
 
     // Initialize sprites
-    // - background tile
-    sprites_.emplace_back(new Sprite(planche_, 0, 128, 96, 128));
-    // - ball
-    sprites_.emplace_back(new Sprite(planche_, 0, 96, 24, 24));
-    // - bar
-    sprites_.emplace_back(new Sprite(planche_, 128, 0, 128, 32));
+    // carreaux de la grille
+    sprites_.emplace_back(new Sprite(planche_, 0, 0, 40, 40));
+    // bloc mauve
+    sprites_.emplace_back(new Sprite(planche_, 0, 41, 38, 38));
+    // bloc bleu
+    sprites_.emplace_back(new Sprite(planche_, 39, 41, 38, 38));
+
+    // // - background tile
+    // sprites_.emplace_back(new Sprite(planche_, 0, 128, 96, 128));
+    // // - ball
+    // sprites_.emplace_back(new Sprite(planche_, 0, 63, 24, 24));
+    // // - bar
+    // sprites_.emplace_back(new Sprite(planche_, 128, 0, 128, 32));
 
     // Initialize balls
     // - allocate
@@ -82,42 +90,56 @@ void Game::draw(double dt)
 {
     // Render background
     // - retrieve background sprite (seamless tile)
-    Sprite *sfond = sprites_[0];
-    // - tile the 2D plan
-    for (int j = 0, h = window_->height(); j <= h; j += sfond->height())
+
+    // Sprite *sfond = sprites_[0];
+    // // - tile the 2D plan
+    // for (int j = 0, h = window_->height(); j <= h; j += sfond->height())
+    // {
+    //     for (int i = 0, w = window_->width(); i <= w; i += sfond->width())
+    //     {
+    //         window_->draw(*sfond, i, j);
+    //     }
+    // }
+
+    Sprite *sCarreau = sprites_[0];
+
+    for (int j = 0, h = 0; h <= 16; j += sCarreau->height(), h++)
     {
-        for (int i = 0, w = window_->width(); i <= w; i += sfond->width())
+        for (int i = 0, w = 0; w <= 8; i += sCarreau->width(), w++)
         {
-            window_->draw(*sfond, i, j);
+            window_->draw(*sCarreau, i, j);
         }
     }
 
-    // Render balls
-    // - retrieve ball sprite
-    Sprite *sball = sprites_[1];
-    // - iterate through balls
-    for (auto &b : balls_)
-    {
-        // Render ball
-        window_->draw(*sball, b.X(), b.Y());
+    Sprite *sBlocMauve = sprites_[1];
+    window_->draw(*sBlocMauve, 1, 1);
 
-        // Move ball
-        b.move([&](double &x, double &y, double &vx, double &vy) {
-            // Collision management (on world border)
-            if ((x < 0) || (x > window_->width() - sball->width()))
-                vx *= -1;
-            if ((y < 0) || (y > window_->height() - sball->height()))
-                vy *= -1;
+    // // Render balls
+    // // - retrieve ball sprite
+    // Sprite *sball = sprites_[1];
+    // // - iterate through balls
+    // for (auto &b : balls_)
+    // {
+    //     // Render ball
+    //     window_->draw(*sball, b.X(), b.Y());
 
-            // Update position
-            x += vx * dt;
-            y += vy * dt;
+    //     // Move ball
+    //     b.move([&](double &x, double &y, double &vx, double &vy) {
+    //         // Collision management (on world border)
+    //         if ((x < 0) || (x > window_->width() - sball->width()))
+    //             vx *= -1;
+    //         if ((y < 0) || (y > window_->height() - sball->height()))
+    //             vy *= -1;
 
-            // Add force(s)
-            // - simulate gravity
-            vy += 100 * dt;
-        });
-    }
+    //         // Update position
+    //         x += vx * dt;
+    //         y += vy * dt;
+
+    //         // Add force(s)
+    //         // - simulate gravity
+    //         vy += 100 * dt;
+    //     });
+    // }
 }
 
 void Game::loop()
