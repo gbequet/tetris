@@ -26,5 +26,5 @@ function(ADD_PRG)
 
 endfunction()
 
-ADD_PRG(TARGET Tetris SOURCES window.h window.cpp window_surface.h window_surface.cpp surface.h surface.cpp sprite.h sprite.cpp ball.h ball.cpp game.h game.cpp main.cpp)
+ADD_PRG(TARGET Tetris SOURCES window.h window.cpp window_surface.h window_surface.cpp surface.h surface.cpp GraphicsObject.h GraphicsObject.cpp sprite.h sprite.cpp  ball.h ball.cpp game.h game.cpp main.cpp)
 

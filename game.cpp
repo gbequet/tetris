@@ -9,6 +9,66 @@
 #include "window.h"
 #include "surface.h"
 #include "sprite.h"
+#include "GraphicsObject.h"
+
+using namespace Graphics;
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// shape T
+//////////////////////////////////////////////////////////////////////////////////////////
+class ShapeT : public GraphicsObject
+{
+public:
+    static ShapeT *create();
+    static ShapeT *create(int x, int y);
+    virtual ~ShapeT();
+
+protected:
+    ShapeT();
+    ShapeT(int x, int y);
+
+private:
+    int current_tile_;
+};
+
+ShapeT *ShapeT::create()
+{
+    return new ShapeT();
+}
+
+ShapeT *ShapeT::create(int x, int y)
+{
+    return new ShapeT(x, y);
+}
+
+ShapeT::ShapeT()
+    : GraphicsObject()
+{
+    tiles_.resize(4 /*nb rotations*/);
+    // shape : T
+    tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(1, 0), std::make_pair(0, 1)};
+    tiles_[1] = {std::make_pair(-1, 1), std::make_pair(0, 0), std::make_pair(0, 1), std::make_pair(0, 2)};
+    tiles_[2] = {std::make_pair(0, 0), std::make_pair(-1, 1), std::make_pair(0, 1), std::make_pair(1, 1)};
+    tiles_[3] = {std::make_pair(0, 0), std::make_pair(0, 1), std::make_pair(0, 2), std::make_pair(1, 1)};
+}
+
+ShapeT::ShapeT(int x, int y)
+    : GraphicsObject(x,y)
+{
+    tiles_.resize(4 /*nb rotations*/);
+    // shape : I
+    tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(1, 0), std::make_pair(0, 1)};
+    tiles_[1] = {std::make_pair(-1, 1), std::make_pair(0, 0), std::make_pair(0, 1), std::make_pair(0, 2)};
+    tiles_[2] = {std::make_pair(0, 0), std::make_pair(-1, 1), std::make_pair(0, 1), std::make_pair(1, 1)};
+    tiles_[3] = {std::make_pair(0, 0), std::make_pair(0, 1), std::make_pair(0, 2), std::make_pair(1, 1)};
+}
+ShapeT::~ShapeT()
+{
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// Game
+//////////////////////////////////////////////////////////////////////////////////////////
 
 Game::Game()
     : window_(nullptr), planche_(nullptr), sprites_(), balls_()
@@ -43,9 +103,9 @@ void Game::initialize()
 
     // Initialize sprites
     // carreaux de la grille
-    sprites_.emplace_back(new Sprite(planche_, 0, 0, 40, 40));
-    // bloc mauve
-    sprites_.emplace_back(new Sprite(planche_, 0, 41, 38, 38));
+    sprites_.emplace_back(new Sprite(planche_, 0, 0, 21, 21));
+    // bloc rouge
+    sprites_.emplace_back(new Sprite(planche_, 20, 0, 21, 21));
     // bloc bleu
     sprites_.emplace_back(new Sprite(planche_, 39, 41, 38, 38));
 
@@ -103,43 +163,49 @@ void Game::draw(double dt)
 
     Sprite *sCarreau = sprites_[0];
 
-    for (int j = 0, h = 0; h <= 16; j += sCarreau->height(), h++)
+    for (int j = 0, h = 0; h <= 20; j += sCarreau->height(), h++)
     {
-        for (int i = 0, w = 0; w <= 8; i += sCarreau->width(), w++)
+        for (int i = 0, w = 0; w <= 10; i += sCarreau->width(), w++)
         {
             window_->draw(*sCarreau, i, j);
         }
     }
 
-    Sprite *sBlocMauve = sprites_[1];
-    window_->draw(*sBlocMauve, 1, 1);
+    Sprite *sBlocRouge = sprites_[1];
 
-    // // Render balls
-    // // - retrieve ball sprite
-    // Sprite *sball = sprites_[1];
-    // // - iterate through balls
-    // for (auto &b : balls_)
-    // {
-    //     // Render ball
-    //     window_->draw(*sball, b.X(), b.Y());
+    {
+        static ShapeT *shape_test;
+        static bool is_shape_initialized = false;
+        if (!is_shape_initialized)
+        {
+            shape_test = ShapeT::create(42, 0);
 
-    //     // Move ball
-    //     b.move([&](double &x, double &y, double &vx, double &vy) {
-    //         // Collision management (on world border)
-    //         if ((x < 0) || (x > window_->width() - sball->width()))
-    //             vx *= -1;
-    //         if ((y < 0) || (y > window_->height() - sball->height()))
-    //             vy *= -1;
+            is_shape_initialized = true;
+        }
+        static int frameID = 0;
+        int rotationID = (frameID / 200 /*slow*/) % 4 /*nb rotations*/;
+        const GraphicsObject::TShape &shapeTiles = shape_test->tiles_[rotationID] /*current rotation ID*/;
+        for (const auto &p : shapeTiles)
+        {
+            const int x = shape_test->getPositionX();
+            const int y = shape_test->getPositionY();
 
-    //         // Update position
-    //         x += vx * dt;
-    //         y += vy * dt;
+            //const int colorID = shape_test->getColorID();
+            // const int colorID = 0;
+            // Sprite *sball = sprites_[colorID]; // boule verte
 
-    //         // Add force(s)
-    //         // - simulate gravity
-    //         vy += 100 * dt;
-    //     });
-    // }
+            /*int rotation_;
+			int nextRotation() { rotation_ = rotation_ % 4 }*/
+
+            const int tileSize = sBlocRouge->height();
+            window_->draw(*sBlocRouge, x + p.first * tileSize, y + p.second * tileSize);
+        }
+        frameID++;
+        if ((frameID % 50 == 0))
+        {
+            shape_test->setPositionY(shape_test->getPositionY() + sBlocRouge->height());
+        }
+    }
 }
 
 void Game::loop()
