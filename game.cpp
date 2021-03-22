@@ -5,6 +5,10 @@
 #include <iostream>
 #include <random>
 #include <cmath>
+#include <list>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
 
 #include "window.h"
 #include "surface.h"
@@ -19,9 +23,18 @@ using namespace Shapes;
 //////////
 
 Game::Game()
-    : frameID_(0), lastMove_(0), lastRotate_(0), pos_cur_bloc(4,0),
-    window_(nullptr), planche_(nullptr), sprites_()
+    : frameID_(0), lastMove_(0), lastGravity_(0), lastRotate_(0), pos_cur_bloc(6, 0), need_new_bloc_(true), indice_color_(0), largeur_carre_(21),
+      window_(nullptr), planche_(nullptr), sprites_()
 {
+    // initialisation presenceGrille_
+    for (size_t i = 0; i < 20; i++)
+    {
+        for (size_t j = 0; j < 10; j++)
+        {
+            std::get<0>(presenceGrille_[i][j]) = false;
+            std::get<1>(presenceGrille_[i][j]) = 0;
+        }
+    }
 }
 
 Game::~Game()
@@ -51,11 +64,19 @@ void Game::initialize()
 
     // Initialize sprites
     // carreaux de la grille
-    sprites_.emplace_back(new Sprite(planche_, 0, 0, 21, 21));
+    sprites_.emplace_back(new Sprite(planche_, 0, 0, largeur_carre_, largeur_carre_));
     // bloc rouge
-    sprites_.emplace_back(new Sprite(planche_, 20, 0, 21, 21));
+    sprites_.emplace_back(new Sprite(planche_, 20, 0, largeur_carre_, largeur_carre_));
+    // bloc orange
+    sprites_.emplace_back(new Sprite(planche_, 40, 0, largeur_carre_, largeur_carre_));
+    // bloc jaune
+    sprites_.emplace_back(new Sprite(planche_, 60, 0, largeur_carre_, largeur_carre_));
+    // bloc vert
+    sprites_.emplace_back(new Sprite(planche_, 80, 0, largeur_carre_, largeur_carre_));
     // bloc bleu
-    sprites_.emplace_back(new Sprite(planche_, 40, 0, 21, 21));
+    sprites_.emplace_back(new Sprite(planche_, 100, 0, largeur_carre_, largeur_carre_));
+    // bloc mauve
+    sprites_.emplace_back(new Sprite(planche_, 120, 0, largeur_carre_, largeur_carre_));
 }
 
 void Game::finalize()
@@ -65,78 +86,119 @@ void Game::finalize()
 
 void Game::keyboard(const std::uint8_t *keys)
 {
-    if (frameID_ - lastMove_ > 100) // ca evite d'aller trop vite ( enleve la condition tu verras haha ;) )
+    if (frameID_ - lastMove_ > 50) // ca evite d'aller trop vite ( enleve la condition tu verras haha ;) )
     {
         if (keys[SDL_SCANCODE_LEFT]){
-            int x = current_bloc_->getPositionX();
-            current_bloc_->setPositionX(x - 21);
-            lastMove_ = frameID_;
+            if (!check_collision(1))
+            {
+                int x = current_bloc_->getPositionX();
+                current_bloc_->setPositionX(x - largeur_carre_);
+                lastMove_ = frameID_;
+            }
         }
 
-        if (keys[SDL_SCANCODE_RIGHT]){
-            int x = current_bloc_->getPositionX();
-            current_bloc_->setPositionX(x + 21);
-            lastMove_ = frameID_;
+        if (keys[SDL_SCANCODE_RIGHT])
+        {
+            if (!check_collision(2))
+            {
+                int x = current_bloc_->getPositionX();
+                current_bloc_->setPositionX(x + largeur_carre_);
+                lastMove_ = frameID_;
+            }
         }
     }
 
     if (keys[SDL_SCANCODE_R])
     {
-        if (frameID_ - lastRotate_ > 100)
+        if (frameID_ - lastRotate_ > 50)
         {
-            int r = current_bloc_->getCurTile();
-            current_bloc_->setCurTile((r + 1) % 4);
-            lastRotate_ = frameID_;
+            if (!check_collision(3))
+            {
+                int r = current_bloc_->getCurTile();
+                current_bloc_->setCurTile((r + 1) % 4);
+                lastRotate_ = frameID_;
+            }
         }
     }
 }
 
 void Game::draw(double dt)
 {
-    Sprite *sCarreau = sprites_[0];
-
-    for (int j = 0, h = 0; h <= 20; j += sCarreau->height(), h++)
+    // affichage grille + blocs deja fini
+    for (int i = 0, h = 0; i < 20; h += largeur_carre_, i++)
     {
-        for (int i = 0, w = 0; w <= 10; i += sCarreau->width(), w++)
+        for (int j = 0, w = 0; j < 10; w += largeur_carre_, j++)
         {
-            window_->draw(*sCarreau, i, j);
+            // !!!! Le probleme vient de la je pense
+            int color = std::get<1>(presenceGrille_[i][j]);
+            window_->draw(*sprites_[color], w, h);
         }
     }
 
-    Sprite *sBloc = sprites_[1];
-
+    // Si besoin d'un nouveau bloc
+    if (need_new_bloc_)
     {
-        static bool is_shape_initialized = false;
-        if (!is_shape_initialized)
-        {
-            current_bloc_ = new ShapeT(5*21, 0);
+        // on tire une couleur au hasard ( entre 1 et 6 )
+        srand(time(0));
+        indice_color_ = (std::rand()%6) + 1;
 
-            is_shape_initialized = true;
-        }
-        int rotation = current_bloc_->getCurTile();
-        const GraphicsObject::TShape &shapeTiles = current_bloc_->tiles_[rotation] /*current rotation ID*/;
-        for (const auto &p : shapeTiles)
-        {
-            const int x = current_bloc_->getPositionX();
-            const int y = current_bloc_->getPositionY();
+        // on initialise un nouveau bloc ( 5*largeur_carre_ pour qu'il soit au milieu )
+        // TODO faire que ce soit une forme au hasard
+        current_bloc_ = new ShapeT(5 * largeur_carre_, 0);
 
-            const int tileSize = sBloc->height();
-            window_->draw(*sBloc, x + p.first * tileSize, y + p.second * tileSize);
-        }
-        frameID_++;
-        if ((frameID_ % 150 == 0))
+        // on (re)initialise sa position
+        std::get<0>(pos_cur_bloc) = 6;
+        std::get<1>(pos_cur_bloc) = 0;
+
+        need_new_bloc_ = false;
+    }
+
+    // affichage du bloc courant
+    int rotation = current_bloc_->getCurTile();
+    const GraphicsObject::TShape &shapeTiles = current_bloc_->tiles_[rotation];
+
+    for (const auto &p : shapeTiles)
+    {
+        const int x = current_bloc_->getPositionX();
+        const int y = current_bloc_->getPositionY();
+
+        const int tileSize = sprites_[indice_color_]->height();
+        window_->draw(*sprites_[indice_color_], x + p.first * tileSize, y + p.second * tileSize);
+    }
+
+    frameID_++;
+
+
+    // gravité
+    if (frameID_ - lastGravity_ > 100)
+    {
+        if (!check_collision(0)) // on le fait descendre
         {
-            if (maj_presenceGrille(0) == true)
-                current_bloc_->setPositionY(current_bloc_->getPositionY() + sBloc->height());
+            current_bloc_->setPositionY(current_bloc_->getPositionY() + largeur_carre_);
         }
+        else // il a atteint le fond ou a atteri sur un ancien bloc => on en envoi un nouveau
+        {
+            // on met a jour presenceGrille_
+            for (const auto &p : shapeTiles)
+            {
+                int i = p.first + std::get<0>(pos_cur_bloc);
+                int j = p.second + std::get<1>(pos_cur_bloc);
+
+                // !!!! l'erreur peut aussi venir de là
+                std::get<0>(presenceGrille_[i][j]) = true;
+                std::get<1>(presenceGrille_[i][j]) = indice_color_;
+            }
+
+            need_new_bloc_ = true; // on demande un nouveau bloc
+        }
+
+        lastGravity_ = frameID_;
     }
 }
 
 /*
     - Checker si le deplacement est possible
     - Mettre a jour pos_cur_bloc
-    - Mettre a jour presenceGrille_
-    C'est juste une idée je ne sais pas si elle est bonne hl ;)
 
     situation = pourquoi on met a jour la grille? ( quel deplacement? )
     0 -> gravité
@@ -144,37 +206,61 @@ void Game::draw(double dt)
     2 -> deplacement droite
     3 -> rotation
 
-    Renvoie true si le deplacement à pu se faire false sinon
+    Effet de bord : met a jour pos_cur_bloc
+    Renvoie true si il y'aurait une collision, false sinon
 */
-bool Game::maj_presenceGrille(int situation)
+bool Game::check_collision(int situation)
 {
-    bool res = true;
+    int rotation = current_bloc_->getCurTile();
+    const GraphicsObject::TShape &shapeTiles = current_bloc_->tiles_[rotation];
+    const GraphicsObject::TShape &tmpTiles = current_bloc_->tiles_[(rotation + 1) % 4]; // Shapes si rotation
 
     switch (situation)
     {
-        // gravité
-        case 0:
-            break;
+    // gravité
+    case 0:
+        for (const auto &p : shapeTiles)
+        {
+            if (p.second + std::get<1>(pos_cur_bloc) + 1 >= 20)
+                return true;
+        }
+        std::get<1>(pos_cur_bloc) += 1;
+        break;
 
-        // gauche
-        case 1:
-            break;
+    // gauche
+    case 1:
+        for (const auto &p : shapeTiles)
+        {
+            if (p.first + std::get<0>(pos_cur_bloc) - 1 <= 0)
+                return true;
+        }
+        std::get<0>(pos_cur_bloc) -= 1;
+        break;
 
-        // droite
-        case 2:
-            break;
+    // droite
+    case 2:
+        for (const auto &p : shapeTiles)
+        {
+            if (p.first + std::get<0>(pos_cur_bloc) + 1 > 10)
+                return true;
+        }
+        std::get<0>(pos_cur_bloc) += 1;
+        break;
 
-        // rotation
-        // plus compliqué pcq ca depend de la shape
-        // TODO
-        case 3:
-            break;
-        
-        default:
-            break;
+    // rotation
+    case 3:
+        for (const auto &p : tmpTiles)
+        {
+            if ((p.first + std::get<0>(pos_cur_bloc) > 10) || (p.first + std::get<0>(pos_cur_bloc) <= 0) || (p.second + std::get<1>(pos_cur_bloc) >= 20))
+                return true;
+        }
+        break;
+
+    default:
+        break;
     }
 
-    return res;
+    return false;
 }
 
 void Game::loop()
