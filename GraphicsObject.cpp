@@ -1,16 +1,13 @@
-// Include class definition
 #include "GraphicsObject.h"
-
-using namespace Graphics;
 
 // Constructor
 GraphicsObject::GraphicsObject()
-    : x(0), y(0)
+    : x(0), y(0), current_tile_(0)
 {
 }
 
 GraphicsObject::GraphicsObject(int a, int b)
-    : x(a), y(b)
+    : x(a), y(b), current_tile_(0)
 {
 }
 
@@ -30,6 +27,11 @@ int GraphicsObject::getPositionY() const
     return y;
 }
 
+int GraphicsObject::getCurTile() const
+{
+    return current_tile_;
+}
+
 void GraphicsObject::setPositionX(int pValue)
 {
     x = pValue;
@@ -38,4 +40,9 @@ void GraphicsObject::setPositionX(int pValue)
 void GraphicsObject::setPositionY(int pValue)
 {
     y = pValue;
+}
+
+void GraphicsObject::setCurTile(int pValue)
+{
+    current_tile_ = pValue;
 }

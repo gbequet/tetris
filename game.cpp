@@ -10,68 +10,17 @@
 #include "surface.h"
 #include "sprite.h"
 #include "GraphicsObject.h"
+#include "Shapes.h"
 
-using namespace Graphics;
+using namespace Shapes;
 
-//////////////////////////////////////////////////////////////////////////////////////////
-// shape T
-//////////////////////////////////////////////////////////////////////////////////////////
-class ShapeT : public GraphicsObject
-{
-public:
-    static ShapeT *create();
-    static ShapeT *create(int x, int y);
-    virtual ~ShapeT();
-
-protected:
-    ShapeT();
-    ShapeT(int x, int y);
-
-private:
-    int current_tile_;
-};
-
-ShapeT *ShapeT::create()
-{
-    return new ShapeT();
-}
-
-ShapeT *ShapeT::create(int x, int y)
-{
-    return new ShapeT(x, y);
-}
-
-ShapeT::ShapeT()
-    : GraphicsObject()
-{
-    tiles_.resize(4 /*nb rotations*/);
-    // shape : T
-    tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(1, 0), std::make_pair(0, 1)};
-    tiles_[1] = {std::make_pair(-1, 1), std::make_pair(0, 0), std::make_pair(0, 1), std::make_pair(0, 2)};
-    tiles_[2] = {std::make_pair(0, 0), std::make_pair(-1, 1), std::make_pair(0, 1), std::make_pair(1, 1)};
-    tiles_[3] = {std::make_pair(0, 0), std::make_pair(0, 1), std::make_pair(0, 2), std::make_pair(1, 1)};
-}
-
-ShapeT::ShapeT(int x, int y)
-    : GraphicsObject(x,y)
-{
-    tiles_.resize(4 /*nb rotations*/);
-    // shape : I
-    tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(1, 0), std::make_pair(0, 1)};
-    tiles_[1] = {std::make_pair(-1, 1), std::make_pair(0, 0), std::make_pair(0, 1), std::make_pair(0, 2)};
-    tiles_[2] = {std::make_pair(0, 0), std::make_pair(-1, 1), std::make_pair(0, 1), std::make_pair(1, 1)};
-    tiles_[3] = {std::make_pair(0, 0), std::make_pair(0, 1), std::make_pair(0, 2), std::make_pair(1, 1)};
-}
-ShapeT::~ShapeT()
-{
-}
-
-//////////////////////////////////////////////////////////////////////////////////////////
-// Game
-//////////////////////////////////////////////////////////////////////////////////////////
+//////////
+// Game //
+//////////
 
 Game::Game()
-    : window_(nullptr), planche_(nullptr), sprites_(), balls_()
+    : frameID_(0), lastMove_(0), lastRotate_(0), pos_cur_bloc(4,0),
+    window_(nullptr), planche_(nullptr), sprites_()
 {
 }
 
@@ -97,7 +46,6 @@ void Game::initialize()
     window_->initialize();
 
     planche_ = new Surface();
-    // const std::string image = "./sprites.bmp";
     const std::string image = "./sprites.bmp";
     planche_->load(image.c_str());
 
@@ -107,32 +55,7 @@ void Game::initialize()
     // bloc rouge
     sprites_.emplace_back(new Sprite(planche_, 20, 0, 21, 21));
     // bloc bleu
-    sprites_.emplace_back(new Sprite(planche_, 39, 41, 38, 38));
-
-    // // - background tile
-    // sprites_.emplace_back(new Sprite(planche_, 0, 128, 96, 128));
-    // // - ball
-    // sprites_.emplace_back(new Sprite(planche_, 0, 63, 24, 24));
-    // // - bar
-    // sprites_.emplace_back(new Sprite(planche_, 128, 0, 128, 32));
-
-    // Initialize balls
-    // - allocate
-    balls_.resize(500);
-    // - randomize
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<double> dis_x(40, window_->width() - 40);
-    std::uniform_real_distribution<double> dis_y(40, window_->height() - 40);
-    std::uniform_real_distribution<double> dis_v_dir(0, 2 * M_PI);
-    std::uniform_real_distribution<double> dis_v_l(50, 250);
-    for (auto &b : balls_)
-    {
-        b.set_pos(dis_x(gen), dis_y(gen));
-        double r = dis_v_l(gen);
-        double a = dis_v_dir(gen);
-        b.set_speed(r * cos(a), r * sin(a));
-    }
+    sprites_.emplace_back(new Sprite(planche_, 40, 0, 21, 21));
 }
 
 void Game::finalize()
@@ -142,25 +65,34 @@ void Game::finalize()
 
 void Game::keyboard(const std::uint8_t *keys)
 {
-    //	if (keys[SDL_SCANCODE_SPACE])
-    //	if (keys[SDL_SCANCODE_UP])
+    if (frameID_ - lastMove_ > 100) // ca evite d'aller trop vite ( enleve la condition tu verras haha ;) )
+    {
+        if (keys[SDL_SCANCODE_LEFT]){
+            int x = current_bloc_->getPositionX();
+            current_bloc_->setPositionX(x - 21);
+            lastMove_ = frameID_;
+        }
+
+        if (keys[SDL_SCANCODE_RIGHT]){
+            int x = current_bloc_->getPositionX();
+            current_bloc_->setPositionX(x + 21);
+            lastMove_ = frameID_;
+        }
+    }
+
+    if (keys[SDL_SCANCODE_R])
+    {
+        if (frameID_ - lastRotate_ > 100)
+        {
+            int r = current_bloc_->getCurTile();
+            current_bloc_->setCurTile((r + 1) % 4);
+            lastRotate_ = frameID_;
+        }
+    }
 }
 
 void Game::draw(double dt)
 {
-    // Render background
-    // - retrieve background sprite (seamless tile)
-
-    // Sprite *sfond = sprites_[0];
-    // // - tile the 2D plan
-    // for (int j = 0, h = window_->height(); j <= h; j += sfond->height())
-    // {
-    //     for (int i = 0, w = window_->width(); i <= w; i += sfond->width())
-    //     {
-    //         window_->draw(*sfond, i, j);
-    //     }
-    // }
-
     Sprite *sCarreau = sprites_[0];
 
     for (int j = 0, h = 0; h <= 20; j += sCarreau->height(), h++)
@@ -171,41 +103,78 @@ void Game::draw(double dt)
         }
     }
 
-    Sprite *sBlocRouge = sprites_[1];
+    Sprite *sBloc = sprites_[1];
 
     {
-        static ShapeT *shape_test;
         static bool is_shape_initialized = false;
         if (!is_shape_initialized)
         {
-            shape_test = ShapeT::create(42, 0);
+            current_bloc_ = new ShapeT(5*21, 0);
 
             is_shape_initialized = true;
         }
-        static int frameID = 0;
-        int rotationID = (frameID / 200 /*slow*/) % 4 /*nb rotations*/;
-        const GraphicsObject::TShape &shapeTiles = shape_test->tiles_[rotationID] /*current rotation ID*/;
+        int rotation = current_bloc_->getCurTile();
+        const GraphicsObject::TShape &shapeTiles = current_bloc_->tiles_[rotation] /*current rotation ID*/;
         for (const auto &p : shapeTiles)
         {
-            const int x = shape_test->getPositionX();
-            const int y = shape_test->getPositionY();
+            const int x = current_bloc_->getPositionX();
+            const int y = current_bloc_->getPositionY();
 
-            //const int colorID = shape_test->getColorID();
-            // const int colorID = 0;
-            // Sprite *sball = sprites_[colorID]; // boule verte
-
-            /*int rotation_;
-			int nextRotation() { rotation_ = rotation_ % 4 }*/
-
-            const int tileSize = sBlocRouge->height();
-            window_->draw(*sBlocRouge, x + p.first * tileSize, y + p.second * tileSize);
+            const int tileSize = sBloc->height();
+            window_->draw(*sBloc, x + p.first * tileSize, y + p.second * tileSize);
         }
-        frameID++;
-        if ((frameID % 50 == 0))
+        frameID_++;
+        if ((frameID_ % 150 == 0))
         {
-            shape_test->setPositionY(shape_test->getPositionY() + sBlocRouge->height());
+            if (maj_presenceGrille(0) == true)
+                current_bloc_->setPositionY(current_bloc_->getPositionY() + sBloc->height());
         }
     }
+}
+
+/*
+    - Checker si le deplacement est possible
+    - Mettre a jour pos_cur_bloc
+    - Mettre a jour presenceGrille_
+    C'est juste une idée je ne sais pas si elle est bonne hl ;)
+
+    situation = pourquoi on met a jour la grille? ( quel deplacement? )
+    0 -> gravité
+    1 -> deplacement gauche
+    2 -> deplacement droite
+    3 -> rotation
+
+    Renvoie true si le deplacement à pu se faire false sinon
+*/
+bool Game::maj_presenceGrille(int situation)
+{
+    bool res = true;
+
+    switch (situation)
+    {
+        // gravité
+        case 0:
+            break;
+
+        // gauche
+        case 1:
+            break;
+
+        // droite
+        case 2:
+            break;
+
+        // rotation
+        // plus compliqué pcq ca depend de la shape
+        // TODO
+        case 3:
+            break;
+        
+        default:
+            break;
+    }
+
+    return res;
 }
 
 void Game::loop()
