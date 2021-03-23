@@ -50,7 +50,7 @@ private:
 
     Surface *planche_;
     std::vector<Sprite *> sprites_;
-    std::tuple<bool,int> presenceGrille_[20][10]; // stocke si il y a un cube et l'indice couleur du bloc ( 0 = carreau de la grille )
+    std::tuple<bool,int> presenceGrille_[10][20]; // stocke si il y a un cube et l'indice couleur du bloc ( 0 = carreau de la grille )
     GraphicsObject *current_bloc_; // Shape courant
     std::tuple<int,int> pos_cur_bloc; // position du bloc courant dans la grille
 };

@@ -27,9 +27,9 @@ Game::Game()
       window_(nullptr), planche_(nullptr), sprites_()
 {
     // initialisation presenceGrille_
-    for (size_t i = 0; i < 20; i++)
+    for (size_t i = 0; i < 10; i++)
     {
-        for (size_t j = 0; j < 10; j++)
+        for (size_t j = 0; j < 20; j++)
         {
             std::get<0>(presenceGrille_[i][j]) = false;
             std::get<1>(presenceGrille_[i][j]) = 0;
@@ -106,6 +106,15 @@ void Game::keyboard(const std::uint8_t *keys)
                 lastMove_ = frameID_;
             }
         }
+
+        if (keys[SDL_SCANCODE_DOWN])
+        {
+            if (!check_collision(0))
+            {
+                current_bloc_->setPositionY(current_bloc_->getPositionY() + largeur_carre_);
+                lastMove_ = frameID_;
+            }
+        }
     }
 
     if (keys[SDL_SCANCODE_R])
@@ -125,13 +134,12 @@ void Game::keyboard(const std::uint8_t *keys)
 void Game::draw(double dt)
 {
     // affichage grille + blocs deja fini
-    for (int i = 0, h = 0; i < 20; h += largeur_carre_, i++)
+    for (int i = 0, h = 0; i < 10; h += largeur_carre_, i++)
     {
-        for (int j = 0, w = 0; j < 10; w += largeur_carre_, j++)
+        for (int j = 0, w = 0; j < 20; w += largeur_carre_, j++)
         {
-            // !!!! Le probleme vient de la je pense
             int color = std::get<1>(presenceGrille_[i][j]);
-            window_->draw(*sprites_[color], w, h);
+            window_->draw(*sprites_[color], h, w);
         }
     }
 
@@ -168,7 +176,6 @@ void Game::draw(double dt)
 
     frameID_++;
 
-
     // gravité
     if (frameID_ - lastGravity_ > 100)
     {
@@ -181,10 +188,9 @@ void Game::draw(double dt)
             // on met a jour presenceGrille_
             for (const auto &p : shapeTiles)
             {
-                int i = p.first + std::get<0>(pos_cur_bloc);
+                int i = p.first + std::get<0>(pos_cur_bloc) - 1; // !! je n'ai pas compris pourquoi il a fallu rajouter -1 (mais ca marche hl)
                 int j = p.second + std::get<1>(pos_cur_bloc);
 
-                // !!!! l'erreur peut aussi venir de là
                 std::get<0>(presenceGrille_[i][j]) = true;
                 std::get<1>(presenceGrille_[i][j]) = indice_color_;
             }
@@ -197,6 +203,7 @@ void Game::draw(double dt)
 }
 
 /*
+    TODO verifier si collision avec bloc deja present
     - Checker si le deplacement est possible
     - Mettre a jour pos_cur_bloc
 
@@ -213,7 +220,10 @@ bool Game::check_collision(int situation)
 {
     int rotation = current_bloc_->getCurTile();
     const GraphicsObject::TShape &shapeTiles = current_bloc_->tiles_[rotation];
-    const GraphicsObject::TShape &tmpTiles = current_bloc_->tiles_[(rotation + 1) % 4]; // Shapes si rotation
+    const GraphicsObject::TShape &tmpTiles = current_bloc_->tiles_[(rotation + 1) % 4]; // Shape si rotation
+
+    int futur_posX;
+    int futur_posY;
 
     switch (situation)
     {
@@ -221,7 +231,9 @@ bool Game::check_collision(int situation)
     case 0:
         for (const auto &p : shapeTiles)
         {
-            if (p.second + std::get<1>(pos_cur_bloc) + 1 >= 20)
+            futur_posX = p.first + std::get<0>(pos_cur_bloc);
+            futur_posY = p.second + std::get<1>(pos_cur_bloc) + 1;
+            if (futur_posY >= 20)
                 return true;
         }
         std::get<1>(pos_cur_bloc) += 1;
@@ -231,7 +243,9 @@ bool Game::check_collision(int situation)
     case 1:
         for (const auto &p : shapeTiles)
         {
-            if (p.first + std::get<0>(pos_cur_bloc) - 1 <= 0)
+            futur_posX = p.first + std::get<0>(pos_cur_bloc) - 1;
+            futur_posY = p.second + std::get<1>(pos_cur_bloc);
+            if (futur_posX <= 0)
                 return true;
         }
         std::get<0>(pos_cur_bloc) -= 1;
@@ -241,7 +255,9 @@ bool Game::check_collision(int situation)
     case 2:
         for (const auto &p : shapeTiles)
         {
-            if (p.first + std::get<0>(pos_cur_bloc) + 1 > 10)
+            futur_posX = p.first + std::get<0>(pos_cur_bloc) + 1;
+            futur_posY = p.second + std::get<1>(pos_cur_bloc);
+            if (futur_posX > 10)
                 return true;
         }
         std::get<0>(pos_cur_bloc) += 1;
