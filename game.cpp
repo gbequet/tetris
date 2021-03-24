@@ -150,9 +150,26 @@ void Game::draw(double dt)
         srand(time(0));
         indice_color_ = (std::rand()%6) + 1;
 
+        int indice_shape = (std::rand()%2); // ( 0=T ; 1=Z)
+
+        switch (indice_shape)
+        {
+        case 0:
+            current_bloc_ = new ShapeT(5 * largeur_carre_, 0);
+            break;
+
+        case 1:
+            current_bloc_ = new ShapeZ(5 * largeur_carre_, 0);
+            break;
+        
+        default:
+            break;
+        }
+
         // on initialise un nouveau bloc ( 5*largeur_carre_ pour qu'il soit au milieu )
         // TODO faire que ce soit une forme au hasard
-        current_bloc_ = new ShapeT(5 * largeur_carre_, 0);
+
+        // current_bloc_ = new ShapeT(5 * largeur_carre_, 0);
 
         // on (re)initialise sa position
         std::get<0>(pos_cur_bloc) = 6;

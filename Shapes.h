@@ -22,6 +22,22 @@ namespace Shapes
     private:
         int current_rotation_;
     };
+
+    /////////////
+    // Shape Z //
+    /////////////
+    class ShapeZ : public GraphicsObject
+    {
+    public:
+        ShapeZ();
+        ShapeZ(int x, int y);
+        virtual ~ShapeZ();
+
+    protected:
+    
+    private:
+        int current_rotation_;
+    };
 }
 
 #endif
