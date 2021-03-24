@@ -142,6 +142,114 @@ Tetris/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/build
 .PHONY : Tetris/fast
 
+GraphicsObject.o: GraphicsObject.cpp.o
+
+.PHONY : GraphicsObject.o
+
+# target to build an object file
+GraphicsObject.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/GraphicsObject.cpp.o
+.PHONY : GraphicsObject.cpp.o
+
+GraphicsObject.i: GraphicsObject.cpp.i
+
+.PHONY : GraphicsObject.i
+
+# target to preprocess a source file
+GraphicsObject.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/GraphicsObject.cpp.i
+.PHONY : GraphicsObject.cpp.i
+
+GraphicsObject.s: GraphicsObject.cpp.s
+
+.PHONY : GraphicsObject.s
+
+# target to generate assembly for a file
+GraphicsObject.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/GraphicsObject.cpp.s
+.PHONY : GraphicsObject.cpp.s
+
+Shapes.o: Shapes.cpp.o
+
+.PHONY : Shapes.o
+
+# target to build an object file
+Shapes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/Shapes.cpp.o
+.PHONY : Shapes.cpp.o
+
+Shapes.i: Shapes.cpp.i
+
+.PHONY : Shapes.i
+
+# target to preprocess a source file
+Shapes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/Shapes.cpp.i
+.PHONY : Shapes.cpp.i
+
+Shapes.s: Shapes.cpp.s
+
+.PHONY : Shapes.s
+
+# target to generate assembly for a file
+Shapes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/Shapes.cpp.s
+.PHONY : Shapes.cpp.s
+
+ball.o: ball.cpp.o
+
+.PHONY : ball.o
+
+# target to build an object file
+ball.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/ball.cpp.o
+.PHONY : ball.cpp.o
+
+ball.i: ball.cpp.i
+
+.PHONY : ball.i
+
+# target to preprocess a source file
+ball.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/ball.cpp.i
+.PHONY : ball.cpp.i
+
+ball.s: ball.cpp.s
+
+.PHONY : ball.s
+
+# target to generate assembly for a file
+ball.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/ball.cpp.s
+.PHONY : ball.cpp.s
+
+game.o: game.cpp.o
+
+.PHONY : game.o
+
+# target to build an object file
+game.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/game.cpp.o
+.PHONY : game.cpp.o
+
+game.i: game.cpp.i
+
+.PHONY : game.i
+
+# target to preprocess a source file
+game.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/game.cpp.i
+.PHONY : game.cpp.i
+
+game.s: game.cpp.s
+
+.PHONY : game.s
+
+# target to generate assembly for a file
+game.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/game.cpp.s
+.PHONY : game.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -168,6 +276,87 @@ main.s: main.cpp.s
 main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+sprite.o: sprite.cpp.o
+
+.PHONY : sprite.o
+
+# target to build an object file
+sprite.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/sprite.cpp.o
+.PHONY : sprite.cpp.o
+
+sprite.i: sprite.cpp.i
+
+.PHONY : sprite.i
+
+# target to preprocess a source file
+sprite.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/sprite.cpp.i
+.PHONY : sprite.cpp.i
+
+sprite.s: sprite.cpp.s
+
+.PHONY : sprite.s
+
+# target to generate assembly for a file
+sprite.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/sprite.cpp.s
+.PHONY : sprite.cpp.s
+
+surface.o: surface.cpp.o
+
+.PHONY : surface.o
+
+# target to build an object file
+surface.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/surface.cpp.o
+.PHONY : surface.cpp.o
+
+surface.i: surface.cpp.i
+
+.PHONY : surface.i
+
+# target to preprocess a source file
+surface.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/surface.cpp.i
+.PHONY : surface.cpp.i
+
+surface.s: surface.cpp.s
+
+.PHONY : surface.s
+
+# target to generate assembly for a file
+surface.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/surface.cpp.s
+.PHONY : surface.cpp.s
+
+window.o: window.cpp.o
+
+.PHONY : window.o
+
+# target to build an object file
+window.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/window.cpp.o
+.PHONY : window.cpp.o
+
+window.i: window.cpp.i
+
+.PHONY : window.i
+
+# target to preprocess a source file
+window.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/window.cpp.i
+.PHONY : window.cpp.i
+
+window.s: window.cpp.s
+
+.PHONY : window.s
+
+# target to generate assembly for a file
+window.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/window.cpp.s
+.PHONY : window.cpp.s
 
 window_surface.o: window_surface.cpp.o
 
@@ -205,9 +394,30 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Tetris"
+	@echo "... GraphicsObject.o"
+	@echo "... GraphicsObject.i"
+	@echo "... GraphicsObject.s"
+	@echo "... Shapes.o"
+	@echo "... Shapes.i"
+	@echo "... Shapes.s"
+	@echo "... ball.o"
+	@echo "... ball.i"
+	@echo "... ball.s"
+	@echo "... game.o"
+	@echo "... game.i"
+	@echo "... game.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... sprite.o"
+	@echo "... sprite.i"
+	@echo "... sprite.s"
+	@echo "... surface.o"
+	@echo "... surface.i"
+	@echo "... surface.s"
+	@echo "... window.o"
+	@echo "... window.i"
+	@echo "... window.s"
 	@echo "... window_surface.o"
 	@echo "... window_surface.i"
 	@echo "... window_surface.s"

@@ -150,7 +150,7 @@ void Game::draw(double dt)
         srand(time(0));
         indice_color_ = (std::rand()%6) + 1;
 
-        int indice_shape = (std::rand()%2); // ( 0=T ; 1=Z)
+        int indice_shape = (std::rand()%7); // ( 0=T ; 1=Z ; 2=I ; 3=O ; 4=L ; 5=J: 6=S)
 
         switch (indice_shape)
         {
@@ -160,6 +160,26 @@ void Game::draw(double dt)
 
         case 1:
             current_bloc_ = new ShapeZ(5 * largeur_carre_, 0);
+            break;
+
+        case 2:
+            current_bloc_ = new ShapeI(5 * largeur_carre_, 0);
+            break;
+
+        case 3:
+            current_bloc_ = new ShapeO(5 * largeur_carre_, 0);
+            break;
+
+        case 4:
+            current_bloc_ = new ShapeL(5 * largeur_carre_, 0);
+            break;
+        
+        case 5:
+            current_bloc_ = new ShapeJ(5 * largeur_carre_, 0);
+            break;
+
+        case 6:
+            current_bloc_ = new ShapeS(5 * largeur_carre_, 0);
             break;
         
         default:

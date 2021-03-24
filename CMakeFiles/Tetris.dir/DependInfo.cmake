@@ -4,7 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/Users/florian/Desktop/ProjetTetris/GraphicsObject.cpp" "/Users/florian/Desktop/ProjetTetris/CMakeFiles/Tetris.dir/GraphicsObject.cpp.o"
+  "/Users/florian/Desktop/ProjetTetris/Shapes.cpp" "/Users/florian/Desktop/ProjetTetris/CMakeFiles/Tetris.dir/Shapes.cpp.o"
+  "/Users/florian/Desktop/ProjetTetris/ball.cpp" "/Users/florian/Desktop/ProjetTetris/CMakeFiles/Tetris.dir/ball.cpp.o"
+  "/Users/florian/Desktop/ProjetTetris/game.cpp" "/Users/florian/Desktop/ProjetTetris/CMakeFiles/Tetris.dir/game.cpp.o"
   "/Users/florian/Desktop/ProjetTetris/main.cpp" "/Users/florian/Desktop/ProjetTetris/CMakeFiles/Tetris.dir/main.cpp.o"
+  "/Users/florian/Desktop/ProjetTetris/sprite.cpp" "/Users/florian/Desktop/ProjetTetris/CMakeFiles/Tetris.dir/sprite.cpp.o"
+  "/Users/florian/Desktop/ProjetTetris/surface.cpp" "/Users/florian/Desktop/ProjetTetris/CMakeFiles/Tetris.dir/surface.cpp.o"
+  "/Users/florian/Desktop/ProjetTetris/window.cpp" "/Users/florian/Desktop/ProjetTetris/CMakeFiles/Tetris.dir/window.cpp.o"
   "/Users/florian/Desktop/ProjetTetris/window_surface.cpp" "/Users/florian/Desktop/ProjetTetris/CMakeFiles/Tetris.dir/window_surface.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
