@@ -23,16 +23,25 @@ using namespace Shapes;
 //////////
 
 Game::Game()
-    : frameID_(0), lastMove_(0), lastGravity_(0), lastRotate_(0), pos_cur_bloc(6, 0), need_new_bloc_(true), indice_color_(0), largeur_carre_(21),
-      window_(nullptr), planche_(nullptr), sprites_()
+    : frameID_(0), 
+    lastMove_(0), 
+    lastGravity_(0), 
+    lastDown_(0), 
+    lastRotate_(0), 
+    pos_cur_bloc(NB_COL / 2, 0), 
+    need_new_bloc_(true), 
+    indice_color_(0), 
+    largeur_carre_(21),
+    window_(nullptr), 
+    planche_(nullptr), 
+    sprites_()
 {
     // initialisation presenceGrille_
-    for (size_t i = 0; i < 10; i++)
+    for (size_t i = 0; i < NB_COL; i++)
     {
-        for (size_t j = 0; j < 20; j++)
+        for (size_t j = 0; j < NB_ROWS; j++)
         {
-            std::get<0>(presenceGrille_[i][j]) = false;
-            std::get<1>(presenceGrille_[i][j]) = 0;
+            presenceGrille_[i][j] = 0;
         }
     }
 }
@@ -106,13 +115,16 @@ void Game::keyboard(const std::uint8_t *keys)
                 lastMove_ = frameID_;
             }
         }
+    }
 
-        if (keys[SDL_SCANCODE_DOWN])
+    if (keys[SDL_SCANCODE_DOWN])
+    {
+        if (frameID_ - lastDown_ > 10)
         {
             if (!check_collision(0))
             {
                 current_bloc_->setPositionY(current_bloc_->getPositionY() + largeur_carre_);
-                lastMove_ = frameID_;
+                lastDown_ = frameID_;
             }
         }
     }
@@ -134,11 +146,11 @@ void Game::keyboard(const std::uint8_t *keys)
 void Game::draw(double dt)
 {
     // affichage grille + blocs deja fini
-    for (int i = 0, h = 0; i < 10; h += largeur_carre_, i++)
+    for (int i = 0, h = 0; i < NB_COL; h += largeur_carre_, i++)
     {
-        for (int j = 0, w = 0; j < 20; w += largeur_carre_, j++)
+        for (int j = 0, w = 0; j < NB_ROWS; w += largeur_carre_, j++)
         {
-            int color = std::get<1>(presenceGrille_[i][j]);
+            int color = presenceGrille_[i][j];
             window_->draw(*sprites_[color], h, w);
         }
     }
@@ -150,6 +162,7 @@ void Game::draw(double dt)
         srand(time(0));
         indice_color_ = (std::rand()%6) + 1;
 
+        // on initialise un nouveau bloc ( 5*largeur_carre_ pour qu'il soit au milieu )
         int indice_shape = (std::rand()%7); // ( 0=T ; 1=Z ; 2=I ; 3=O ; 4=L ; 5=J: 6=S)
 
         switch (indice_shape)
@@ -186,13 +199,8 @@ void Game::draw(double dt)
             break;
         }
 
-        // on initialise un nouveau bloc ( 5*largeur_carre_ pour qu'il soit au milieu )
-        // TODO faire que ce soit une forme au hasard
-
-        // current_bloc_ = new ShapeT(5 * largeur_carre_, 0);
-
         // on (re)initialise sa position
-        std::get<0>(pos_cur_bloc) = 6;
+        std::get<0>(pos_cur_bloc) = NB_COL/2;
         std::get<1>(pos_cur_bloc) = 0;
 
         need_new_bloc_ = false;
@@ -225,11 +233,10 @@ void Game::draw(double dt)
             // on met a jour presenceGrille_
             for (const auto &p : shapeTiles)
             {
-                int i = p.first + std::get<0>(pos_cur_bloc) - 1; // !! je n'ai pas compris pourquoi il a fallu rajouter -1 (mais ca marche hl)
+                int i = p.first + std::get<0>(pos_cur_bloc);
                 int j = p.second + std::get<1>(pos_cur_bloc);
 
-                std::get<0>(presenceGrille_[i][j]) = true;
-                std::get<1>(presenceGrille_[i][j]) = indice_color_;
+                presenceGrille_[i][j] = indice_color_;
             }
 
             need_new_bloc_ = true; // on demande un nouveau bloc
@@ -270,7 +277,9 @@ bool Game::check_collision(int situation)
         {
             futur_posX = p.first + std::get<0>(pos_cur_bloc);
             futur_posY = p.second + std::get<1>(pos_cur_bloc) + 1;
-            if (futur_posY >= 20)
+            if (futur_posY >= NB_ROWS)
+                return true;
+            if (presenceGrille_[futur_posX][futur_posY] != 0)
                 return true;
         }
         std::get<1>(pos_cur_bloc) += 1;
@@ -282,7 +291,9 @@ bool Game::check_collision(int situation)
         {
             futur_posX = p.first + std::get<0>(pos_cur_bloc) - 1;
             futur_posY = p.second + std::get<1>(pos_cur_bloc);
-            if (futur_posX <= 0)
+            if (futur_posX < 0)
+                return true;
+            if (presenceGrille_[futur_posX][futur_posY] != 0)
                 return true;
         }
         std::get<0>(pos_cur_bloc) -= 1;
@@ -294,7 +305,9 @@ bool Game::check_collision(int situation)
         {
             futur_posX = p.first + std::get<0>(pos_cur_bloc) + 1;
             futur_posY = p.second + std::get<1>(pos_cur_bloc);
-            if (futur_posX > 10)
+            if (futur_posX >= NB_COL)
+                return true;
+            if (presenceGrille_[futur_posX][futur_posY] != 0)
                 return true;
         }
         std::get<0>(pos_cur_bloc) += 1;
@@ -304,7 +317,7 @@ bool Game::check_collision(int situation)
     case 3:
         for (const auto &p : tmpTiles)
         {
-            if ((p.first + std::get<0>(pos_cur_bloc) > 10) || (p.first + std::get<0>(pos_cur_bloc) <= 0) || (p.second + std::get<1>(pos_cur_bloc) >= 20))
+            if ((p.first + std::get<0>(pos_cur_bloc) >= NB_COL) || (p.first + std::get<0>(pos_cur_bloc) < 0) || (p.second + std::get<1>(pos_cur_bloc) >= NB_ROWS))
                 return true;
         }
         break;

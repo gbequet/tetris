@@ -8,6 +8,9 @@
 #include "ball.h"
 #include "Shapes.h"
 
+#define NB_COL 10
+#define NB_ROWS 20
+
 class Window;
 class Surface;
 class Sprite;
@@ -35,6 +38,7 @@ private:
     int frameID_; // compteur de temps
     int lastMove_; // instant du dernier deplacement a gauche ou droite
     int lastGravity_; // instant de la derniere gravité affectée
+    int lastDown_;    // instant de la derniere gravité affectée
     int lastRotate_; // instant du dernier rotate
     bool need_new_bloc_; // vrai si on a besoin d'un nouveau bloc, faux sinon
     int indice_color_; // indice de la couleur ( le meme que dans sprites_ )
@@ -50,7 +54,7 @@ private:
 
     Surface *planche_;
     std::vector<Sprite *> sprites_;
-    std::tuple<bool,int> presenceGrille_[10][20]; // stocke si il y a un cube et l'indice couleur du bloc ( 0 = carreau de la grille )
+    int presenceGrille_[NB_COL][NB_ROWS]; // stocke si il y a un cube et l'indice couleur du bloc ( 0 = carreau de la grille )
     GraphicsObject *current_bloc_; // Shape courant
     std::tuple<int,int> pos_cur_bloc; // position du bloc courant dans la grille
 };
