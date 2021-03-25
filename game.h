@@ -32,6 +32,9 @@ protected:
     void keyboard(const std::uint8_t *keys);
 
     bool check_collision(int situation);
+    void clear_line(int i);
+    void make_bloc_fall(int i);
+    void update_presenceGrille();
 
 private:
     int largeur_carre_;

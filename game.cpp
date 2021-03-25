@@ -239,11 +239,49 @@ void Game::draw(double dt)
                 presenceGrille_[i][j] = indice_color_;
             }
 
+            update_presenceGrille();
+
             need_new_bloc_ = true; // on demande un nouveau bloc
         }
 
         lastGravity_ = frameID_;
     }
+}
+
+void Game::update_presenceGrille()
+{
+    bool rempli;
+    for (int i = 0; i < NB_ROWS; i++)
+    {
+        rempli = true;
+
+        for (int j = 0; j < NB_COL; j++)
+        {
+            if (presenceGrille_[j][i] == 0)
+                rempli = false;
+        }
+
+        if (rempli)
+        {
+            clear_line(i);
+            make_bloc_fall(i);
+        }
+
+        rempli = true;
+    }
+}
+
+void Game::clear_line(int i)
+{
+    for (int j = 0; j < NB_COL; j++)
+    {
+        presenceGrille_[j][i] = 0;
+    }
+}
+
+void Game::make_bloc_fall(int i)
+{
+    
 }
 
 /*
