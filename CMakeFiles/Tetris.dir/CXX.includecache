@@ -6,45 +6,31 @@
 
 #IncludeRegexTransform: 
 
-/Users/florian/Desktop/ProjetTetris/GraphicsObject.cpp
+/Users/florian/Desktop/Tetris2/GraphicsObject.cpp
 GraphicsObject.h
-/Users/florian/Desktop/ProjetTetris/GraphicsObject.h
+/Users/florian/Desktop/Tetris2/GraphicsObject.h
 
-/Users/florian/Desktop/ProjetTetris/GraphicsObject.h
+/Users/florian/Desktop/Tetris2/GraphicsObject.h
 vector
 -
 utility
 -
 
-/Users/florian/Desktop/ProjetTetris/Shapes.cpp
+/Users/florian/Desktop/Tetris2/Shapes.cpp
 Shapes.h
-/Users/florian/Desktop/ProjetTetris/Shapes.h
+/Users/florian/Desktop/Tetris2/Shapes.h
 
-/Users/florian/Desktop/ProjetTetris/Shapes.h
+/Users/florian/Desktop/Tetris2/Shapes.h
 vector
 -
 utility
 -
 GraphicsObject.h
-/Users/florian/Desktop/ProjetTetris/GraphicsObject.h
+/Users/florian/Desktop/Tetris2/GraphicsObject.h
 
-/Users/florian/Desktop/ProjetTetris/ball.cpp
-ball.h
-/Users/florian/Desktop/ProjetTetris/ball.h
-string
--
-iostream
--
-
-/Users/florian/Desktop/ProjetTetris/ball.h
-ball.inl
-/Users/florian/Desktop/ProjetTetris/ball.inl
-
-/Users/florian/Desktop/ProjetTetris/ball.inl
-
-/Users/florian/Desktop/ProjetTetris/game.cpp
+/Users/florian/Desktop/Tetris2/game.cpp
 game.h
-/Users/florian/Desktop/ProjetTetris/game.h
+/Users/florian/Desktop/Tetris2/game.h
 SDL.h
 -
 string
@@ -66,17 +52,17 @@ ctime
 cstdlib
 -
 window.h
-/Users/florian/Desktop/ProjetTetris/window.h
+/Users/florian/Desktop/Tetris2/window.h
 surface.h
-/Users/florian/Desktop/ProjetTetris/surface.h
+/Users/florian/Desktop/Tetris2/surface.h
 sprite.h
-/Users/florian/Desktop/ProjetTetris/sprite.h
+/Users/florian/Desktop/Tetris2/sprite.h
 GraphicsObject.h
-/Users/florian/Desktop/ProjetTetris/GraphicsObject.h
+/Users/florian/Desktop/Tetris2/GraphicsObject.h
 Shapes.h
-/Users/florian/Desktop/ProjetTetris/Shapes.h
+/Users/florian/Desktop/Tetris2/Shapes.h
 
-/Users/florian/Desktop/ProjetTetris/game.h
+/Users/florian/Desktop/Tetris2/game.h
 cstdint
 -
 vector
@@ -85,63 +71,49 @@ list
 -
 tuple
 -
-ball.h
-/Users/florian/Desktop/ProjetTetris/ball.h
 Shapes.h
-/Users/florian/Desktop/ProjetTetris/Shapes.h
+/Users/florian/Desktop/Tetris2/Shapes.h
 
-/Users/florian/Desktop/ProjetTetris/main.cpp
-iostream
--
+/Users/florian/Desktop/Tetris2/main.cpp
 SDL.h
 -
-window_surface.h
-/Users/florian/Desktop/ProjetTetris/window_surface.h
+game.h
+/Users/florian/Desktop/Tetris2/game.h
 
-/Users/florian/Desktop/ProjetTetris/sprite.cpp
+/Users/florian/Desktop/Tetris2/sprite.cpp
 sprite.h
-/Users/florian/Desktop/ProjetTetris/sprite.h
+/Users/florian/Desktop/Tetris2/sprite.h
 SDL.h
 -
 surface.h
-/Users/florian/Desktop/ProjetTetris/surface.h
+/Users/florian/Desktop/Tetris2/surface.h
 
-/Users/florian/Desktop/ProjetTetris/sprite.h
+/Users/florian/Desktop/Tetris2/sprite.h
 
-/Users/florian/Desktop/ProjetTetris/surface.cpp
+/Users/florian/Desktop/Tetris2/surface.cpp
 surface.h
-/Users/florian/Desktop/ProjetTetris/surface.h
+/Users/florian/Desktop/Tetris2/surface.h
 SDL.h
 -
 sprite.h
-/Users/florian/Desktop/ProjetTetris/sprite.h
+/Users/florian/Desktop/Tetris2/sprite.h
 
-/Users/florian/Desktop/ProjetTetris/surface.h
+/Users/florian/Desktop/Tetris2/surface.h
 string
 -
 
-/Users/florian/Desktop/ProjetTetris/window.cpp
+/Users/florian/Desktop/Tetris2/window.cpp
 SDL.h
 -
 window.h
-/Users/florian/Desktop/ProjetTetris/window.h
+/Users/florian/Desktop/Tetris2/window.h
 surface.h
-/Users/florian/Desktop/ProjetTetris/surface.h
+/Users/florian/Desktop/Tetris2/surface.h
 
-/Users/florian/Desktop/ProjetTetris/window.h
+/Users/florian/Desktop/Tetris2/window.h
 SDL.h
 -
 string
--
-
-/Users/florian/Desktop/ProjetTetris/window_surface.cpp
-SDL.h
--
-window_surface.h
-/Users/florian/Desktop/ProjetTetris/window_surface.h
-
-/Users/florian/Desktop/ProjetTetris/window_surface.h
-SDL.h
 -
 
 /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL.h

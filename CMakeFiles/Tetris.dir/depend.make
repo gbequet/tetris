@@ -8,14 +8,8 @@ CMakeFiles/Tetris.dir/Shapes.cpp.o: GraphicsObject.h
 CMakeFiles/Tetris.dir/Shapes.cpp.o: Shapes.cpp
 CMakeFiles/Tetris.dir/Shapes.cpp.o: Shapes.h
 
-CMakeFiles/Tetris.dir/ball.cpp.o: ball.cpp
-CMakeFiles/Tetris.dir/ball.cpp.o: ball.h
-CMakeFiles/Tetris.dir/ball.cpp.o: ball.inl
-
 CMakeFiles/Tetris.dir/game.cpp.o: GraphicsObject.h
 CMakeFiles/Tetris.dir/game.cpp.o: Shapes.h
-CMakeFiles/Tetris.dir/game.cpp.o: ball.h
-CMakeFiles/Tetris.dir/game.cpp.o: ball.inl
 CMakeFiles/Tetris.dir/game.cpp.o: game.cpp
 CMakeFiles/Tetris.dir/game.cpp.o: game.h
 CMakeFiles/Tetris.dir/game.cpp.o: sprite.h
@@ -70,8 +64,10 @@ CMakeFiles/Tetris.dir/game.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/S
 CMakeFiles/Tetris.dir/game.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/begin_code.h
 CMakeFiles/Tetris.dir/game.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/close_code.h
 
+CMakeFiles/Tetris.dir/main.cpp.o: GraphicsObject.h
+CMakeFiles/Tetris.dir/main.cpp.o: Shapes.h
+CMakeFiles/Tetris.dir/main.cpp.o: game.h
 CMakeFiles/Tetris.dir/main.cpp.o: main.cpp
-CMakeFiles/Tetris.dir/main.cpp.o: window_surface.h
 CMakeFiles/Tetris.dir/main.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL.h
 CMakeFiles/Tetris.dir/main.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_assert.h
 CMakeFiles/Tetris.dir/main.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_atomic.h
@@ -276,55 +272,4 @@ CMakeFiles/Tetris.dir/window.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2
 CMakeFiles/Tetris.dir/window.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_video.h
 CMakeFiles/Tetris.dir/window.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/begin_code.h
 CMakeFiles/Tetris.dir/window.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/close_code.h
-
-CMakeFiles/Tetris.dir/window_surface.cpp.o: window_surface.cpp
-CMakeFiles/Tetris.dir/window_surface.cpp.o: window_surface.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_assert.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_atomic.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_audio.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_blendmode.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_clipboard.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_config.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_cpuinfo.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_endian.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_error.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_events.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_filesystem.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_gamecontroller.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_gesture.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_haptic.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_hints.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_joystick.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_keyboard.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_keycode.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_loadso.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_locale.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_log.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_main.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_messagebox.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_metal.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_misc.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_mouse.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_mutex.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_pixels.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_platform.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_power.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_quit.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_rect.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_render.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_rwops.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_scancode.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_sensor.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_shape.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_stdinc.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_surface.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_system.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_thread.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_timer.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_touch.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_version.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/SDL_video.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/begin_code.h
-CMakeFiles/Tetris.dir/window_surface.cpp.o: /usr/local/Cellar/sdl2/2.0.14_1/include/SDL2/close_code.h
 

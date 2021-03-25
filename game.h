@@ -5,7 +5,6 @@
 #include <vector>
 #include <list>
 #include <tuple>
-#include "ball.h"
 #include "Shapes.h"
 
 #define NB_COL 10

@@ -67,10 +67,10 @@ RM = /usr/local/Cellar/cmake/3.19.1/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/florian/Desktop/ProjetTetris
+CMAKE_SOURCE_DIR = /Users/florian/Desktop/Tetris2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/florian/Desktop/ProjetTetris
+CMAKE_BINARY_DIR = /Users/florian/Desktop/Tetris2
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -99,9 +99,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/florian/Desktop/ProjetTetris/CMakeFiles /Users/florian/Desktop/ProjetTetris//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/florian/Desktop/Tetris2/CMakeFiles /Users/florian/Desktop/Tetris2//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/florian/Desktop/ProjetTetris/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/florian/Desktop/Tetris2/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -195,33 +195,6 @@ Shapes.s: Shapes.cpp.s
 Shapes.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/Shapes.cpp.s
 .PHONY : Shapes.cpp.s
-
-ball.o: ball.cpp.o
-
-.PHONY : ball.o
-
-# target to build an object file
-ball.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/ball.cpp.o
-.PHONY : ball.cpp.o
-
-ball.i: ball.cpp.i
-
-.PHONY : ball.i
-
-# target to preprocess a source file
-ball.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/ball.cpp.i
-.PHONY : ball.cpp.i
-
-ball.s: ball.cpp.s
-
-.PHONY : ball.s
-
-# target to generate assembly for a file
-ball.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/ball.cpp.s
-.PHONY : ball.cpp.s
 
 game.o: game.cpp.o
 
@@ -358,33 +331,6 @@ window.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/window.cpp.s
 .PHONY : window.cpp.s
 
-window_surface.o: window_surface.cpp.o
-
-.PHONY : window_surface.o
-
-# target to build an object file
-window_surface.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/window_surface.cpp.o
-.PHONY : window_surface.cpp.o
-
-window_surface.i: window_surface.cpp.i
-
-.PHONY : window_surface.i
-
-# target to preprocess a source file
-window_surface.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/window_surface.cpp.i
-.PHONY : window_surface.cpp.i
-
-window_surface.s: window_surface.cpp.s
-
-.PHONY : window_surface.s
-
-# target to generate assembly for a file
-window_surface.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Tetris.dir/build.make CMakeFiles/Tetris.dir/window_surface.cpp.s
-.PHONY : window_surface.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -400,9 +346,6 @@ help:
 	@echo "... Shapes.o"
 	@echo "... Shapes.i"
 	@echo "... Shapes.s"
-	@echo "... ball.o"
-	@echo "... ball.i"
-	@echo "... ball.s"
 	@echo "... game.o"
 	@echo "... game.i"
 	@echo "... game.s"
@@ -418,9 +361,6 @@ help:
 	@echo "... window.o"
 	@echo "... window.i"
 	@echo "... window.s"
-	@echo "... window_surface.o"
-	@echo "... window_surface.i"
-	@echo "... window_surface.s"
 .PHONY : help
 
 

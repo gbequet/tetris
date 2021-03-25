@@ -64,7 +64,7 @@ Game::~Game()
 
 void Game::initialize()
 {
-    window_ = new Window("GAME", 800, 800);
+    window_ = new Window("TETRIS", 800, 600);
     window_->initialize();
 
     planche_ = new Surface();
@@ -119,7 +119,7 @@ void Game::keyboard(const std::uint8_t *keys)
 
     if (keys[SDL_SCANCODE_DOWN])
     {
-        if (frameID_ - lastDown_ > 10)
+        if (frameID_ - lastDown_ > 35)
         {
             if (!check_collision(0))
             {
@@ -209,7 +209,6 @@ void Game::draw(double dt)
     // affichage du bloc courant
     int rotation = current_bloc_->getCurTile();
     const GraphicsObject::TShape &shapeTiles = current_bloc_->tiles_[rotation];
-
     for (const auto &p : shapeTiles)
     {
         const int x = current_bloc_->getPositionX();
@@ -217,6 +216,7 @@ void Game::draw(double dt)
 
         const int tileSize = sprites_[indice_color_]->height();
         window_->draw(*sprites_[indice_color_], x + p.first * tileSize, y + p.second * tileSize);
+
     }
 
     frameID_++;
@@ -236,6 +236,46 @@ void Game::draw(double dt)
                 int i = p.first + std::get<0>(pos_cur_bloc);
                 int j = p.second + std::get<1>(pos_cur_bloc);
 
+                // switch (flo)
+                // {
+                // case 0:
+                // {
+                //     presenceGrille_[i][j] = 6;
+                //     break;
+                // }
+                // case 1:
+                // {
+                //     presenceGrille_[i][j] = 1;
+                //     break;
+                // }
+                // case 2:
+                // {
+                //     presenceGrille_[i][j] = 1;
+                //     break;
+                // }
+                // case 3:
+                // {
+                //     presenceGrille_[i][j] = 3;
+                //     break;
+                // }
+                // case 4:
+                // {
+                //     presenceGrille_[i][j] = 2;
+                //     break;
+                // }
+                // case 5:
+                // {
+                //     presenceGrille_[i][j] = 5;
+                //     break;
+                // }
+                // case 6:
+                // {
+                //     presenceGrille_[i][j] = 4;
+                //     break;
+                // }
+                // default:
+                //     break;
+                // }
                 presenceGrille_[i][j] = indice_color_;
             }
 

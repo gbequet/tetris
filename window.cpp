@@ -7,7 +7,7 @@ using namespace std;
 // Constructeurs
 Window::Window() : 
     pWindow_(nullptr), win_surf_(nullptr),
-    width_(200), height_(200), title_("Fenetre sans nom")
+    width_(800), height_(600), title_("TETRIS")
 {
 }
 
@@ -31,7 +31,7 @@ int Window::height() const
 // Initialisation
 void Window::initialize()
 {
-    pWindow_ = SDL_CreateWindow(title_.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width_, height_, SDL_WINDOW_SHOWN);
+    pWindow_ = SDL_CreateWindow(title_.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width_, height_, SDL_WINDOW_SHOWN);
 
     SDL_Surface *surface = SDL_GetWindowSurface(pWindow_);
     surface_ = new Surface(surface);
