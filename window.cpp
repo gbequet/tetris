@@ -12,7 +12,7 @@ Window::Window() :
 }
 
 Window::Window(const std::string &name, const int w, const int h) : 
-    pWindow_(nullptr), win_surf_(nullptr), 
+    pWindow_(nullptr), win_surf_(nullptr),
     width_(w), height_(h), title_(name)
 {
 }
@@ -34,7 +34,12 @@ void Window::initialize()
     pWindow_ = SDL_CreateWindow(title_.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width_, height_, SDL_WINDOW_SHOWN);
 
     SDL_Surface *surface = SDL_GetWindowSurface(pWindow_);
+    SDL_FillRect(surface, NULL, 0xFFF5EE); 
+    // e1d2b8
+    // 0xFFF5EE, F4E5D4
+    //SDL_Flip(surface); 
     surface_ = new Surface(surface);
+    //planche1_ = new Surface(surface);
 }
 
 // Destruction de la fenetre pour SDL

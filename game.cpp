@@ -86,6 +86,7 @@ void Game::initialize()
     sprites_.emplace_back(new Sprite(planche_, 100, 0, largeur_carre_, largeur_carre_));
     // bloc mauve
     sprites_.emplace_back(new Sprite(planche_, 120, 0, largeur_carre_, largeur_carre_));
+
 }
 
 void Game::finalize()
@@ -236,46 +237,6 @@ void Game::draw(double dt)
                 int i = p.first + std::get<0>(pos_cur_bloc);
                 int j = p.second + std::get<1>(pos_cur_bloc);
 
-                // switch (flo)
-                // {
-                // case 0:
-                // {
-                //     presenceGrille_[i][j] = 6;
-                //     break;
-                // }
-                // case 1:
-                // {
-                //     presenceGrille_[i][j] = 1;
-                //     break;
-                // }
-                // case 2:
-                // {
-                //     presenceGrille_[i][j] = 1;
-                //     break;
-                // }
-                // case 3:
-                // {
-                //     presenceGrille_[i][j] = 3;
-                //     break;
-                // }
-                // case 4:
-                // {
-                //     presenceGrille_[i][j] = 2;
-                //     break;
-                // }
-                // case 5:
-                // {
-                //     presenceGrille_[i][j] = 5;
-                //     break;
-                // }
-                // case 6:
-                // {
-                //     presenceGrille_[i][j] = 4;
-                //     break;
-                // }
-                // default:
-                //     break;
-                // }
                 presenceGrille_[i][j] = indice_color_;
             }
 
