@@ -68,7 +68,7 @@ void Game::initialize()
     window_->initialize();
 
     planche_ = new Surface();
-    const std::string image = "./sprites.bmp";
+    const std::string image = "./spritescopie.bmp";
     planche_->load(image.c_str());
 
     // Initialize sprites
@@ -86,7 +86,8 @@ void Game::initialize()
     sprites_.emplace_back(new Sprite(planche_, 100, 0, largeur_carre_, largeur_carre_));
     // bloc mauve
     sprites_.emplace_back(new Sprite(planche_, 120, 0, largeur_carre_, largeur_carre_));
-
+    // bloc bleu clair
+    // sprites_.emplace_back(new Sprite(planche_, 140, 0, largeur_carre_, largeur_carre_));
 }
 
 void Game::finalize()
