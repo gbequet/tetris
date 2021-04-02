@@ -34,6 +34,7 @@ Game::Game()
     largeur_carre_(21),
     window_(nullptr), 
     planche_(nullptr), 
+    compteurPoints(0),
     sprites_()
 {
     // initialisation presenceGrille_
@@ -218,7 +219,6 @@ void Game::draw(double dt)
 
         const int tileSize = sprites_[indice_color_]->height();
         window_->draw(*sprites_[indice_color_], x + p.first * tileSize, y + p.second * tileSize);
-
     }
 
     frameID_++;
@@ -266,6 +266,8 @@ void Game::update_presenceGrille()
         if (rempli)
         {
             clear_line(i);
+            compteurPoints++;
+            printf("Points: %d\n", compteurPoints);
             make_bloc_fall(i);
         }
 
@@ -281,9 +283,15 @@ void Game::clear_line(int i)
     }
 }
 
-void Game::make_bloc_fall(int i)
+void Game::make_bloc_fall(int a)
 {
-    
+    for (int i = a; i > 0; --i)
+    {
+        for (int j = 0; j < NB_COL; ++j)
+        {
+            presenceGrille_[j][i] = presenceGrille_[j][i-1];
+        }
+    }
 }
 
 /*

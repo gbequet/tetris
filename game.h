@@ -32,7 +32,7 @@ protected:
 
     bool check_collision(int situation);
     void clear_line(int i);
-    void make_bloc_fall(int i);
+    void make_bloc_fall(int a);
     void update_presenceGrille();
 
 private:
@@ -44,6 +44,7 @@ private:
     int lastRotate_; // instant du dernier rotate
     bool need_new_bloc_; // vrai si on a besoin d'un nouveau bloc, faux sinon
     int indice_color_; // indice de la couleur ( le meme que dans sprites_ )
+    int compteurPoints; // compteur qui compte les points
     /* 
         (0) carreaux de la grille 
         (1) rouge 
