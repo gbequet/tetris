@@ -34,6 +34,7 @@ protected:
     void clear_line(int i);
     void make_bloc_fall(int a);
     void update_presenceGrille();
+    bool GameOver();
 
 private:
     int largeur_carre_;

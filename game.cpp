@@ -226,6 +226,7 @@ void Game::draw(double dt)
     // gravité
     if (frameID_ - lastGravity_ > 100)
     {
+
         if (!check_collision(0)) // on le fait descendre
         {
             current_bloc_->setPositionY(current_bloc_->getPositionY() + largeur_carre_);
@@ -242,6 +243,11 @@ void Game::draw(double dt)
             }
 
             update_presenceGrille();
+
+            if(GameOver()){
+                printf("Fini!\n");
+                exit(2);
+            } 
 
             need_new_bloc_ = true; // on demande un nouveau bloc
         }
@@ -290,8 +296,21 @@ void Game::make_bloc_fall(int a)
         for (int j = 0; j < NB_COL; ++j)
         {
             presenceGrille_[j][i] = presenceGrille_[j][i-1];
+            // if (!check_collision(0)) // on le fait descendre
+            // {
+            //     current_bloc_->setPositionY(current_bloc_->getPositionY() + largeur_carre_);
+            // }
         }
     }
+}
+
+bool Game::GameOver(){
+    for(int i = 4; i <= 7; i++ ){
+        if(presenceGrille_[i][0] == 1) {
+            return true;
+        }
+    }
+    return false;
 }
 
 /*
