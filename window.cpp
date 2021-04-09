@@ -35,6 +35,7 @@ void Window::initialize()
 
     SDL_Surface *surface = SDL_GetWindowSurface(pWindow_);
     SDL_FillRect(surface, NULL, 0xFFF5EE); 
+
     // e1d2b8
     // 0xFFF5EE, F4E5D4
     //SDL_Flip(surface); 

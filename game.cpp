@@ -210,16 +210,19 @@ void Game::draw(double dt)
     }
 
     // affichage du bloc courant
+    int flo = 0;
     int rotation = current_bloc_->getCurTile();
     const GraphicsObject::TShape &shapeTiles = current_bloc_->tiles_[rotation];
+
     for (const auto &p : shapeTiles)
     {
         const int x = current_bloc_->getPositionX();
         const int y = current_bloc_->getPositionY();
 
         const int tileSize = sprites_[indice_color_]->height();
-        window_->draw(*sprites_[indice_color_], x + p.first * tileSize, y + p.second * tileSize);
+        window_->draw(*sprites_[indice_color_], x + p.first * tileSize, y + p.second * tileSize);        
     }
+
 
     frameID_++;
 
@@ -306,7 +309,7 @@ void Game::make_bloc_fall(int a)
 
 bool Game::GameOver(){
     for(int i = 4; i <= 7; i++ ){
-        if(presenceGrille_[i][0] == 1) {
+        if(presenceGrille_[i][1] == 1) { // normalement c'est 0 mais comme il y a encore un petit bug qui retarde le truc je l'ai mis à 1
             return true;
         }
     }
@@ -401,9 +404,24 @@ void Game::loop()
     Uint64 now = SDL_GetPerformanceCounter(); // timers
     Uint64 prev = now;
 
+    // audio
+    SDL_Init(SDL_INIT_AUDIO);
+    // load WAV file
+    SDL_AudioSpec wavSpec;
+    Uint32 wavLength;
+    Uint8 *wavBuffer;
+    
+    SDL_LoadWAV("POL-hitch-a-ride-short.wav", &wavSpec, &wavBuffer, &wavLength);
+    SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
+
+
     bool quit = false;
     while (!quit)
     {
+        // play audio
+        int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
+        SDL_PauseAudioDevice(deviceId, 0);
+
         // Event management
         SDL_Event event;
         while (!quit && SDL_PollEvent(&event))
@@ -412,6 +430,9 @@ void Game::loop()
             {
             case SDL_QUIT:
                 quit = true;
+                // audio
+                SDL_CloseAudioDevice(deviceId);
+	            SDL_FreeWAV(wavBuffer);
                 break;
             }
         }

@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
 		return 1;
-	}
+	}	
 
 	Game *game = new Game();
 
@@ -18,6 +18,8 @@ int main(int argc, char **argv)
 	game = nullptr;
 
 	SDL_Quit();
+ 
+return 0;
 
 	return 0;
 }

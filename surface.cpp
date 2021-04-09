@@ -2,6 +2,7 @@
 #include <SDL.h>
 #include "sprite.h"
 
+
 // Constructeurs
 Surface::Surface()
     : surface_(nullptr), manageSurface_(true)
