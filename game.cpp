@@ -35,6 +35,7 @@ Game::Game()
     window_(nullptr), 
     planche_(nullptr), 
     compteurPoints(0),
+    niveau(0),
     sprites_()
 {
     // initialisation presenceGrille_
@@ -276,7 +277,11 @@ void Game::update_presenceGrille()
         {
             clear_line(i);
             compteurPoints++;
-            printf("Points: %d\n", compteurPoints);
+            if(compteurPoints % 10 == 0)
+            {
+                niveau++;
+            }
+            printf("Points: %d - Niveau: %d\n", compteurPoints, niveau);
             make_bloc_fall(i);
         }
 
@@ -404,7 +409,7 @@ void Game::loop()
     Uint64 now = SDL_GetPerformanceCounter(); // timers
     Uint64 prev = now;
 
-    // audio
+    // // audio
     SDL_Init(SDL_INIT_AUDIO);
     // load WAV file
     SDL_AudioSpec wavSpec;
@@ -419,7 +424,7 @@ void Game::loop()
     while (!quit)
     {
         // play audio
-        int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
+        SDL_QueueAudio(deviceId, wavBuffer, wavLength);
         SDL_PauseAudioDevice(deviceId, 0);
 
         // Event management
@@ -431,8 +436,8 @@ void Game::loop()
             case SDL_QUIT:
                 quit = true;
                 // audio
-                SDL_CloseAudioDevice(deviceId);
-	            SDL_FreeWAV(wavBuffer);
+                // SDL_CloseAudioDevice(deviceId);
+	            // SDL_FreeWAV(wavBuffer);
                 break;
             }
         }
@@ -451,4 +456,6 @@ void Game::loop()
         // Update window (refresh)
         window_->update();
     }
+    SDL_CloseAudioDevice(deviceId);
+	SDL_FreeWAV(wavBuffer);
 }

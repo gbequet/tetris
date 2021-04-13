@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include "game.h"
+#include "time.h"
 
 int main(int argc, char **argv)
 {
@@ -9,9 +10,15 @@ int main(int argc, char **argv)
 	}	
 
 	Game *game = new Game();
+	clock_t start = clock();
 
 	game->initialize();
-	game->loop();
+
+	game->loop();	
+	clock_t end = clock();
+	double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+
+	printf("Temps écoulé: %f\n", time_spent);
 	game->finalize();
 
 	delete game;
