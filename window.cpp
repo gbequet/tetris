@@ -55,6 +55,11 @@ void Window::draw(const Sprite &sprite, int x, int y)
     surface_->draw(sprite, x, y);
 }
 
+void Window::drawLevel(const Sprite &sprite, int x, int y)
+{
+    surface_->drawLevel(sprite, x, y);
+}
+
 
 void Window::update() const
 {

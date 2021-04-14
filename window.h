@@ -22,6 +22,7 @@ class Window
         void finalize();
 
         void draw(const Sprite &sprite, int x, int y);
+        void drawLevel(const Sprite &sprite, int x, int y);
 
         void update() const;
         

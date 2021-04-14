@@ -54,3 +54,11 @@ void Surface::draw(const Sprite &sprite, int x, int y)
     SDL_Rect dst{x + 290, y + 90, 0, 0};
     SDL_BlitSurface(sprite.surface_->surface_, sprite.geometry_, surface_, &dst);
 }
+
+void Surface::drawLevel(const Sprite &sprite, int x, int y)
+{
+    // SDL_Rect dst1{x, y, 0, 0};
+    // SDL_BlitSurface(sprite.surface_->surface_, NULL, surface_, NULL);
+    SDL_Rect dst{x, y, 0, 0};
+    SDL_BlitSurface(sprite.surface_->surface_, sprite.geometry_, surface_, &dst);
+}

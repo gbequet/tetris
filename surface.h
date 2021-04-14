@@ -24,6 +24,7 @@ class Surface
         void load(const std::string &template_file);
 
         void draw(const Sprite &sprite, int x, int y);
+        void drawLevel(const Sprite &sprite, int x, int y);
 
     protected:
         SDL_Surface *surface_;

@@ -48,7 +48,9 @@ private:
     int compteurPoints; // compteur qui compte les points
     int niveau; // affiche le niveau du jeu (incrémente chaque 10 points)
     int vitesseGravite; // change à partir d'un certain niveau pour augmenter la difficulté
-    bool quit;
+    bool quit; // pour quitter le jeu
+    int compteurSprite; // compteur pour afficher les points
+    int compteurSpriteNiveau; // compteur pour afficher les niveaux
     /* 
         (0) carreaux de la grille 
         (1) rouge 
