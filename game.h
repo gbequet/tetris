@@ -46,7 +46,9 @@ private:
     bool need_new_bloc_; // vrai si on a besoin d'un nouveau bloc, faux sinon
     int indice_color_; // indice de la couleur ( le meme que dans sprites_ )
     int compteurPoints; // compteur qui compte les points
-    int niveau;
+    int niveau; // affiche le niveau du jeu (incrémente chaque 10 points)
+    int vitesseGravite; // change à partir d'un certain niveau pour augmenter la difficulté
+    bool quit;
     /* 
         (0) carreaux de la grille 
         (1) rouge 

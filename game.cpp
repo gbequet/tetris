@@ -36,6 +36,8 @@ Game::Game()
     planche_(nullptr), 
     compteurPoints(0),
     niveau(0),
+    vitesseGravite(100),
+    quit(false),
     sprites_()
 {
     // initialisation presenceGrille_
@@ -211,7 +213,6 @@ void Game::draw(double dt)
     }
 
     // affichage du bloc courant
-    int flo = 0;
     int rotation = current_bloc_->getCurTile();
     const GraphicsObject::TShape &shapeTiles = current_bloc_->tiles_[rotation];
 
@@ -228,7 +229,7 @@ void Game::draw(double dt)
     frameID_++;
 
     // gravité
-    if (frameID_ - lastGravity_ > 100)
+    if (frameID_ - lastGravity_ > vitesseGravite)
     {
 
         if (!check_collision(0)) // on le fait descendre
@@ -280,6 +281,7 @@ void Game::update_presenceGrille()
             if(compteurPoints % 10 == 0)
             {
                 niveau++;
+                vitesseGravite-=2;
             }
             printf("Points: %d - Niveau: %d\n", compteurPoints, niveau);
             make_bloc_fall(i);
@@ -314,8 +316,10 @@ void Game::make_bloc_fall(int a)
 
 bool Game::GameOver(){
     for(int i = 4; i <= 7; i++ ){
-        if(presenceGrille_[i][1] == 1) { // normalement c'est 0 mais comme il y a encore un petit bug qui retarde le truc je l'ai mis à 1
-            return true;
+        if(presenceGrille_[i][1] == 1) {
+            //return true;
+            //exit(2);
+            quit = true;
         }
     }
     return false;
@@ -420,7 +424,7 @@ void Game::loop()
     SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
 
 
-    bool quit = false;
+    //bool quit = false;
     while (!quit)
     {
         // play audio
