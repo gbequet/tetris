@@ -29,12 +29,14 @@ class Window
         void WinSize();
         void WinSurface();
 
+        void clear();
+
     private:
         int width_;
 	    int height_;
+
         SDL_Window *pWindow_;
         SDL_Surface *win_surf_;
-
         Surface *surface_;
         std::string title_;
 };

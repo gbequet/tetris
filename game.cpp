@@ -121,7 +121,7 @@ void Game::initialize()
     sprites_.emplace_back(new Sprite(planche_, 0, 79, sizeButtonPlaySingle, sizeButtonPlaySingle));
 
     // bloc noir
-    sprites_.emplace_back(new Sprite(planche_, 160, 0, 90, 90));
+    sprites_.emplace_back(new Sprite(planche_, 160, 0, 80, 80));
 }
 
 void Game::finalize()
@@ -179,24 +179,9 @@ void Game::keyboard(const std::uint8_t *keys)
     }
 }
 
-void Game::clearForDraw()
-{
-    // SDL_FillRect(window_, NULL, 0x000000);
-    // SDL_RenderClear(window_);
-    // Sprite *sfond = sprites_[20]; // bloc noir 
-    // for (int j = 0, h = window_->height(); j <= h; j += sfond->height())
-    // {
-    //     for (int i = 0, w = window_->width(); i <= w; i += sfond->width())
-    //     {
-    //         window_->draw(*sfond, i, j);
-    //     }
-    // }
-}
-
 void Game::drawMenu(double dt)
 {
     window_->draw(*sprites_[19], XCoordButtonPlaySingle, YCoordButtonPlaySingle);
-    window_->draw(*sprites_[20], XCoordButtonPlaySingle, YCoordButtonPlaySingle);
 }
 
 void Game::drawSingleGame(double dt)
@@ -536,7 +521,7 @@ void Game::loop()
                     int diffY = event.button.y - YCoordButtonPlaySingle;
                     if ((diffX > 0) && (diffX < sizeButtonPlaySingle) && (diffY > 0) && (diffY < sizeButtonPlaySingle))
                     {
-                        clearForDraw();
+                        window_->clear();
                         pdraw = &Game::drawSingleGame; // on affiche le jeu
                     }
                     break;
@@ -552,9 +537,7 @@ void Game::loop()
         prev = now;
         now = SDL_GetPerformanceCounter();
         double delta_t = (double)((now - prev) / (double)SDL_GetPerformanceFrequency());
-        // draw(delta_t);
         (*this.*pdraw)(delta_t);
-        // (Game::(*pdraw))(delta_t);
 
         // Update window (refresh)
         window_->update();

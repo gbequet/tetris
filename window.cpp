@@ -35,11 +35,7 @@ void Window::initialize()
 
     SDL_Surface *surface = SDL_GetWindowSurface(pWindow_);
 
-    // e1d2b8
-    // 0xFFF5EE, F4E5D4
-    //SDL_Flip(surface); 
     surface_ = new Surface(surface);
-    //planche1_ = new Surface(surface);
 }
 
 // Destruction de la fenetre pour SDL
@@ -59,6 +55,12 @@ void Window::drawLevel(const Sprite &sprite, int x, int y)
     surface_->drawLevel(sprite, x, y);
 }
 
+void Window::clear()
+{
+    SDL_Surface *surface = SDL_GetWindowSurface(pWindow_);
+    SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0, 0, 0));
+    SDL_UpdateWindowSurface(pWindow_);
+}
 
 void Window::update() const
 {

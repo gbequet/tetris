@@ -25,10 +25,11 @@ class Surface
 
         void draw(const Sprite &sprite, int x, int y);
         void drawLevel(const Sprite &sprite, int x, int y);
+        SDL_Surface *getSurface();
+
 
     protected:
         SDL_Surface *surface_;
-
         Surface(SDL_Surface *surface);
         
         /**
