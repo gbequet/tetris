@@ -183,12 +183,16 @@ void Game::draw(double dt)
     // Si besoin d'un nouveau bloc
     if (need_new_bloc_)
     {
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_real_distribution<double> couleur(1, 6);
+        std::uniform_real_distribution<double> forme(0, 6);
+
         // on tire une couleur au hasard ( entre 1 et 6 )
-        srand(time(0));
-        indice_color_ = (std::rand()%6) + 1;
+        indice_color_ = int(couleur(gen));
 
         // on initialise un nouveau bloc ( 5*largeur_carre_ pour qu'il soit au milieu )
-        int indice_shape = (std::rand()%7); // ( 0=T ; 1=Z ; 2=I ; 3=O ; 4=L ; 5=J: 6=S)
+        int indice_shape = int(forme(gen)); // ( 0=T ; 1=Z ; 2=I ; 3=O ; 4=L ; 5=J: 6=S)
 
         switch (indice_shape)
         {

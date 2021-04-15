@@ -34,7 +34,6 @@ void Window::initialize()
     pWindow_ = SDL_CreateWindow(title_.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width_, height_, SDL_WINDOW_SHOWN);
 
     SDL_Surface *surface = SDL_GetWindowSurface(pWindow_);
-    SDL_FillRect(surface, NULL, 0xFFF5EE); 
 
     // e1d2b8
     // 0xFFF5EE, F4E5D4
