@@ -6,31 +6,31 @@
 
 #IncludeRegexTransform: 
 
-/Users/florian/Desktop/Tetris2/GraphicsObject.cpp
+/Users/florian/programmation-avancee-tetris/GraphicsObject.cpp
 GraphicsObject.h
-/Users/florian/Desktop/Tetris2/GraphicsObject.h
+/Users/florian/programmation-avancee-tetris/GraphicsObject.h
 
-/Users/florian/Desktop/Tetris2/GraphicsObject.h
+/Users/florian/programmation-avancee-tetris/GraphicsObject.h
 vector
 -
 utility
 -
 
-/Users/florian/Desktop/Tetris2/Shapes.cpp
+/Users/florian/programmation-avancee-tetris/Shapes.cpp
 Shapes.h
-/Users/florian/Desktop/Tetris2/Shapes.h
+/Users/florian/programmation-avancee-tetris/Shapes.h
 
-/Users/florian/Desktop/Tetris2/Shapes.h
+/Users/florian/programmation-avancee-tetris/Shapes.h
 vector
 -
 utility
 -
 GraphicsObject.h
-/Users/florian/Desktop/Tetris2/GraphicsObject.h
+/Users/florian/programmation-avancee-tetris/GraphicsObject.h
 
-/Users/florian/Desktop/Tetris2/game.cpp
+/Users/florian/programmation-avancee-tetris/game.cpp
 game.h
-/Users/florian/Desktop/Tetris2/game.h
+/Users/florian/programmation-avancee-tetris/game.h
 SDL.h
 -
 string
@@ -52,17 +52,17 @@ ctime
 cstdlib
 -
 window.h
-/Users/florian/Desktop/Tetris2/window.h
+/Users/florian/programmation-avancee-tetris/window.h
 surface.h
-/Users/florian/Desktop/Tetris2/surface.h
+/Users/florian/programmation-avancee-tetris/surface.h
 sprite.h
-/Users/florian/Desktop/Tetris2/sprite.h
+/Users/florian/programmation-avancee-tetris/sprite.h
 GraphicsObject.h
-/Users/florian/Desktop/Tetris2/GraphicsObject.h
+/Users/florian/programmation-avancee-tetris/GraphicsObject.h
 Shapes.h
-/Users/florian/Desktop/Tetris2/Shapes.h
+/Users/florian/programmation-avancee-tetris/Shapes.h
 
-/Users/florian/Desktop/Tetris2/game.h
+/Users/florian/programmation-avancee-tetris/game.h
 cstdint
 -
 vector
@@ -72,45 +72,47 @@ list
 tuple
 -
 Shapes.h
-/Users/florian/Desktop/Tetris2/Shapes.h
+/Users/florian/programmation-avancee-tetris/Shapes.h
 
-/Users/florian/Desktop/Tetris2/main.cpp
+/Users/florian/programmation-avancee-tetris/main.cpp
 SDL.h
 -
 game.h
-/Users/florian/Desktop/Tetris2/game.h
+/Users/florian/programmation-avancee-tetris/game.h
+time.h
+/Users/florian/programmation-avancee-tetris/time.h
 
-/Users/florian/Desktop/Tetris2/sprite.cpp
+/Users/florian/programmation-avancee-tetris/sprite.cpp
 sprite.h
-/Users/florian/Desktop/Tetris2/sprite.h
+/Users/florian/programmation-avancee-tetris/sprite.h
 SDL.h
 -
 surface.h
-/Users/florian/Desktop/Tetris2/surface.h
+/Users/florian/programmation-avancee-tetris/surface.h
 
-/Users/florian/Desktop/Tetris2/sprite.h
+/Users/florian/programmation-avancee-tetris/sprite.h
 
-/Users/florian/Desktop/Tetris2/surface.cpp
+/Users/florian/programmation-avancee-tetris/surface.cpp
 surface.h
-/Users/florian/Desktop/Tetris2/surface.h
+/Users/florian/programmation-avancee-tetris/surface.h
 SDL.h
 -
 sprite.h
-/Users/florian/Desktop/Tetris2/sprite.h
+/Users/florian/programmation-avancee-tetris/sprite.h
 
-/Users/florian/Desktop/Tetris2/surface.h
+/Users/florian/programmation-avancee-tetris/surface.h
 string
 -
 
-/Users/florian/Desktop/Tetris2/window.cpp
+/Users/florian/programmation-avancee-tetris/window.cpp
 SDL.h
 -
 window.h
-/Users/florian/Desktop/Tetris2/window.h
+/Users/florian/programmation-avancee-tetris/window.h
 surface.h
-/Users/florian/Desktop/Tetris2/surface.h
+/Users/florian/programmation-avancee-tetris/surface.h
 
-/Users/florian/Desktop/Tetris2/window.h
+/Users/florian/programmation-avancee-tetris/window.h
 SDL.h
 -
 string

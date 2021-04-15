@@ -38,6 +38,8 @@ Game::Game()
     niveau(0),
     vitesseGravite(100),
     quit(false),
+    compteurSprite(8),
+    compteurSpriteNiveau(8),
     sprites_()
 {
     // initialisation presenceGrille_
@@ -72,7 +74,7 @@ void Game::initialize()
     window_->initialize();
 
     planche_ = new Surface();
-    const std::string image = "./spritescopie.bmp";
+    const std::string image = "./spritescopie2.bmp";
     planche_->load(image.c_str());
 
     // Initialize sprites
@@ -92,6 +94,23 @@ void Game::initialize()
     sprites_.emplace_back(new Sprite(planche_, 120, 0, largeur_carre_, largeur_carre_));
     // bloc bleu clair
     // sprites_.emplace_back(new Sprite(planche_, 140, 0, largeur_carre_, largeur_carre_));
+    // Points
+    sprites_.emplace_back(new Sprite(planche_, 0, 20, 53, 20));
+    window_->draw(*sprites_[7], -100, 20);
+    // Numero
+    sprites_.emplace_back(new Sprite(planche_, 0, 41, 12, 18)); // 1
+    sprites_.emplace_back(new Sprite(planche_, 15, 41, 12, 18));
+    sprites_.emplace_back(new Sprite(planche_, 30, 41, 12, 18));
+    sprites_.emplace_back(new Sprite(planche_, 45, 41, 12, 18));
+    sprites_.emplace_back(new Sprite(planche_, 60, 41, 12, 18));
+    sprites_.emplace_back(new Sprite(planche_, 75, 41, 12, 18));
+    sprites_.emplace_back(new Sprite(planche_, 90, 41, 12, 18));
+    sprites_.emplace_back(new Sprite(planche_, 105, 41, 12, 18));
+    sprites_.emplace_back(new Sprite(planche_, 120, 41, 12, 18));
+    sprites_.emplace_back(new Sprite(planche_, 135, 41, 12, 18));
+    // Niveau
+    sprites_.emplace_back(new Sprite(planche_, 0, 60, 62, 20));
+    window_->draw(*sprites_[18], 250, 20);
 }
 
 void Game::finalize()
@@ -261,6 +280,7 @@ void Game::draw(double dt)
     }
 }
 
+
 void Game::update_presenceGrille()
 {
     bool rempli;
@@ -281,7 +301,56 @@ void Game::update_presenceGrille()
             if(compteurPoints % 10 == 0)
             {
                 niveau++;
+                window_->draw(*sprites_[compteurSpriteNiveau], 270, 50);
+                compteurSpriteNiveau++;
                 vitesseGravite-=2;
+            }
+            // va jusqu'à 29 pour l'instant et niveau jusqu'à 9
+            if(compteurPoints <= 8)
+            {
+                window_->draw(*sprites_[compteurSprite], -80, 50);
+                compteurSprite++;
+            } 
+            else if(compteurPoints == 9)
+            {
+                window_->draw(*sprites_[compteurSprite], -80, 50);
+                compteurSprite = 8;
+            }
+            else if(compteurPoints == 10) 
+            {
+                window_->draw(*sprites_[compteurSprite], -90, 50);
+                window_->draw(*sprites_[17], -80, 50);
+                compteurSprite++;
+            }
+            else if(compteurPoints >= 11 && compteurPoints <= 17) 
+            {
+                window_->draw(*sprites_[8], -90, 50);
+                window_->draw(*sprites_[compteurSprite], -80, 50);
+                compteurSprite++;
+            }
+            else if(compteurPoints == 18)
+            {
+                window_->draw(*sprites_[8], -90, 50);
+                window_->draw(*sprites_[compteurSprite], -80, 50);
+                compteurSprite = 8;
+            }
+            else if(compteurPoints == 19)
+            {
+                window_->draw(*sprites_[8], -90, 50);
+                window_->draw(*sprites_[16], -80, 50);
+                compteurSprite = 8;
+            }
+            else if(compteurPoints == 20) 
+            {
+                window_->draw(*sprites_[9], -90, 50);
+                window_->draw(*sprites_[17], -80, 50);
+                compteurSprite = 8;
+            }
+            else if(compteurPoints >= 21 && compteurPoints <= 29) 
+            {
+                window_->draw(*sprites_[9], -90, 50);
+                window_->draw(*sprites_[compteurSprite], -80, 50);
+                compteurSprite++;
             }
             printf("Points: %d - Niveau: %d\n", compteurPoints, niveau);
             make_bloc_fall(i);
@@ -306,17 +375,13 @@ void Game::make_bloc_fall(int a)
         for (int j = 0; j < NB_COL; ++j)
         {
             presenceGrille_[j][i] = presenceGrille_[j][i-1];
-            // if (!check_collision(0)) // on le fait descendre
-            // {
-            //     current_bloc_->setPositionY(current_bloc_->getPositionY() + largeur_carre_);
-            // }
         }
     }
 }
 
 bool Game::GameOver(){
     for(int i = 4; i <= 7; i++ ){
-        if(presenceGrille_[i][1] == 1) {
+        if(presenceGrille_[i][0] == 1) {
             //return true;
             //exit(2);
             quit = true;
@@ -413,23 +478,9 @@ void Game::loop()
     Uint64 now = SDL_GetPerformanceCounter(); // timers
     Uint64 prev = now;
 
-    // // audio
-    SDL_Init(SDL_INIT_AUDIO);
-    // load WAV file
-    SDL_AudioSpec wavSpec;
-    Uint32 wavLength;
-    Uint8 *wavBuffer;
-    
-    SDL_LoadWAV("POL-hitch-a-ride-short.wav", &wavSpec, &wavBuffer, &wavLength);
-    SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
-
-
     //bool quit = false;
     while (!quit)
     {
-        // play audio
-        SDL_QueueAudio(deviceId, wavBuffer, wavLength);
-        SDL_PauseAudioDevice(deviceId, 0);
 
         // Event management
         SDL_Event event;
@@ -439,9 +490,6 @@ void Game::loop()
             {
             case SDL_QUIT:
                 quit = true;
-                // audio
-                // SDL_CloseAudioDevice(deviceId);
-	            // SDL_FreeWAV(wavBuffer);
                 break;
             }
         }
@@ -460,6 +508,4 @@ void Game::loop()
         // Update window (refresh)
         window_->update();
     }
-    SDL_CloseAudioDevice(deviceId);
-	SDL_FreeWAV(wavBuffer);
 }

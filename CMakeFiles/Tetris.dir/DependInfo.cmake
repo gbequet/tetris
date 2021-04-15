@@ -4,13 +4,13 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/florian/Desktop/Tetris2/GraphicsObject.cpp" "/Users/florian/Desktop/Tetris2/CMakeFiles/Tetris.dir/GraphicsObject.cpp.o"
-  "/Users/florian/Desktop/Tetris2/Shapes.cpp" "/Users/florian/Desktop/Tetris2/CMakeFiles/Tetris.dir/Shapes.cpp.o"
-  "/Users/florian/Desktop/Tetris2/game.cpp" "/Users/florian/Desktop/Tetris2/CMakeFiles/Tetris.dir/game.cpp.o"
-  "/Users/florian/Desktop/Tetris2/main.cpp" "/Users/florian/Desktop/Tetris2/CMakeFiles/Tetris.dir/main.cpp.o"
-  "/Users/florian/Desktop/Tetris2/sprite.cpp" "/Users/florian/Desktop/Tetris2/CMakeFiles/Tetris.dir/sprite.cpp.o"
-  "/Users/florian/Desktop/Tetris2/surface.cpp" "/Users/florian/Desktop/Tetris2/CMakeFiles/Tetris.dir/surface.cpp.o"
-  "/Users/florian/Desktop/Tetris2/window.cpp" "/Users/florian/Desktop/Tetris2/CMakeFiles/Tetris.dir/window.cpp.o"
+  "/Users/florian/programmation-avancee-tetris/GraphicsObject.cpp" "/Users/florian/programmation-avancee-tetris/CMakeFiles/Tetris.dir/GraphicsObject.cpp.o"
+  "/Users/florian/programmation-avancee-tetris/Shapes.cpp" "/Users/florian/programmation-avancee-tetris/CMakeFiles/Tetris.dir/Shapes.cpp.o"
+  "/Users/florian/programmation-avancee-tetris/game.cpp" "/Users/florian/programmation-avancee-tetris/CMakeFiles/Tetris.dir/game.cpp.o"
+  "/Users/florian/programmation-avancee-tetris/main.cpp" "/Users/florian/programmation-avancee-tetris/CMakeFiles/Tetris.dir/main.cpp.o"
+  "/Users/florian/programmation-avancee-tetris/sprite.cpp" "/Users/florian/programmation-avancee-tetris/CMakeFiles/Tetris.dir/sprite.cpp.o"
+  "/Users/florian/programmation-avancee-tetris/surface.cpp" "/Users/florian/programmation-avancee-tetris/CMakeFiles/Tetris.dir/surface.cpp.o"
+  "/Users/florian/programmation-avancee-tetris/window.cpp" "/Users/florian/programmation-avancee-tetris/CMakeFiles/Tetris.dir/window.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

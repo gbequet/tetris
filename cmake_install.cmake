@@ -1,4 +1,4 @@
-# Install script for directory: /Users/florian/Desktop/Tetris2
+# Install script for directory: /Users/florian/programmation-avancee-tetris
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/florian/Desktop/Tetris2/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/florian/programmation-avancee-tetris/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
