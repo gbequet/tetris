@@ -121,7 +121,7 @@ void Game::initialize()
     sprites_.emplace_back(new Sprite(planche_, 0, 79, sizeButtonPlaySingle, sizeButtonPlaySingle));
 
     // bloc noir
-    sprites_.emplace_back(new Sprite(planche_, 165, 0, largeur_carre_, largeur_carre_));
+    sprites_.emplace_back(new Sprite(planche_, 160, 0, 90, 90));
 }
 
 void Game::finalize()
@@ -181,19 +181,22 @@ void Game::keyboard(const std::uint8_t *keys)
 
 void Game::clearForDraw()
 {
-    Sprite *sfond = sprites_[20]; // bloc noir 
-    for (int j = 0, h = window_->width(); j <= h; j += sfond->height())
-    {
-        for (int i = 0, w = window_->height(); i <= w; i += sfond->width())
-        {
-            window_->draw(*sfond, i, j);
-        }
-    }
+    // SDL_FillRect(window_, NULL, 0x000000);
+    // SDL_RenderClear(window_);
+    // Sprite *sfond = sprites_[20]; // bloc noir 
+    // for (int j = 0, h = window_->height(); j <= h; j += sfond->height())
+    // {
+    //     for (int i = 0, w = window_->width(); i <= w; i += sfond->width())
+    //     {
+    //         window_->draw(*sfond, i, j);
+    //     }
+    // }
 }
 
 void Game::drawMenu(double dt)
 {
     window_->draw(*sprites_[19], XCoordButtonPlaySingle, YCoordButtonPlaySingle);
+    window_->draw(*sprites_[20], XCoordButtonPlaySingle, YCoordButtonPlaySingle);
 }
 
 void Game::drawSingleGame(double dt)
@@ -335,55 +338,55 @@ void Game::update_presenceGrille()
             if(compteurPoints % 10 == 0)
             {
                 niveau++;
-                window_->draw(*sprites_[compteurSpriteNiveau], 270, 50);
+                window_->draw(*sprites_[compteurSpriteNiveau], XToCenter + 270, YToCenter + 50);
                 compteurSpriteNiveau++;
                 vitesseGravite-=2;
             }
             // va jusqu'à 29 pour l'instant et niveau jusqu'à 9
             if(compteurPoints <= 8)
             {
-                window_->draw(*sprites_[compteurSprite], -80, 50);
+                window_->draw(*sprites_[compteurSprite], XToCenter - 80, YToCenter + 50);
                 compteurSprite++;
             } 
             else if(compteurPoints == 9)
             {
-                window_->draw(*sprites_[compteurSprite], -80, 50);
+                window_->draw(*sprites_[compteurSprite], XToCenter - 80, YToCenter + 50);
                 compteurSprite = 8;
             }
             else if(compteurPoints == 10) 
             {
-                window_->draw(*sprites_[compteurSprite], -90, 50);
-                window_->draw(*sprites_[17], -80, 50);
+                window_->draw(*sprites_[compteurSprite], XToCenter - 90, YToCenter + 50);
+                window_->draw(*sprites_[17], XToCenter - 80, YToCenter + 50);
                 compteurSprite++;
             }
             else if(compteurPoints >= 11 && compteurPoints <= 17) 
             {
-                window_->draw(*sprites_[8], -90, 50);
-                window_->draw(*sprites_[compteurSprite], -80, 50);
+                window_->draw(*sprites_[8], XToCenter - 90, YToCenter + 50);
+                window_->draw(*sprites_[compteurSprite], XToCenter - 80, YToCenter + 50);
                 compteurSprite++;
             }
             else if(compteurPoints == 18)
             {
-                window_->draw(*sprites_[8], -90, 50);
-                window_->draw(*sprites_[compteurSprite], -80, 50);
+                window_->draw(*sprites_[8], XToCenter - 90, YToCenter + 50);
+                window_->draw(*sprites_[compteurSprite], XToCenter - 80, YToCenter + 50);
                 compteurSprite = 8;
             }
             else if(compteurPoints == 19)
             {
-                window_->draw(*sprites_[8], -90, 50);
-                window_->draw(*sprites_[16], -80, 50);
+                window_->draw(*sprites_[8], XToCenter - 90, YToCenter + 50);
+                window_->draw(*sprites_[16], XToCenter - 80, YToCenter + 50);
                 compteurSprite = 8;
             }
             else if(compteurPoints == 20) 
             {
-                window_->draw(*sprites_[9], -90, 50);
-                window_->draw(*sprites_[17], -80, 50);
+                window_->draw(*sprites_[9], XToCenter - 90, YToCenter + 50);
+                window_->draw(*sprites_[17], XToCenter - 80, YToCenter + 50);
                 compteurSprite = 8;
             }
             else if(compteurPoints >= 21 && compteurPoints <= 29) 
             {
-                window_->draw(*sprites_[9], -90, 50);
-                window_->draw(*sprites_[compteurSprite], -80, 50);
+                window_->draw(*sprites_[9], XToCenter - 90, YToCenter + 50);
+                window_->draw(*sprites_[compteurSprite], XToCenter - 80, YToCenter + 50);
                 compteurSprite++;
             }
             printf("Points: %d - Niveau: %d\n", compteurPoints, niveau);
@@ -529,9 +532,6 @@ void Game::loop()
                     break;
 
                 case SDL_MOUSEBUTTONDOWN:
-                    printf("mouse click %d\n", event.button.button);
-                    printf("mouse X position %d\n", event.button.x);
-                    printf("mouse Y position %d\n", event.button.y);
                     int diffX = event.button.x - XCoordButtonPlaySingle;
                     int diffY = event.button.y - YCoordButtonPlaySingle;
                     if ((diffX > 0) && (diffX < sizeButtonPlaySingle) && (diffY > 0) && (diffY < sizeButtonPlaySingle))
