@@ -27,7 +27,9 @@ public:
 
 protected:
     Window *window_;
-    void draw(double dt);
+    void drawSingleGame(double dt);
+    void drawMenu(double dt);
+    void clearForDraw();
     void keyboard(const std::uint8_t *keys);
 
     bool check_collision(int situation);
@@ -51,6 +53,11 @@ private:
     bool quit; // pour quitter le jeu
     int compteurSprite; // compteur pour afficher les points
     int compteurSpriteNiveau; // compteur pour afficher les niveaux
+    int XCoordButtonPlaySingle;
+    int YCoordButtonPlaySingle;
+    int sizeButtonPlaySingle;
+    int XToCenter;
+    int YToCenter;
     /* 
         (0) carreaux de la grille 
         (1) rouge 

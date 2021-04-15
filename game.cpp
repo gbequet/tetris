@@ -40,6 +40,9 @@ Game::Game()
     quit(false),
     compteurSprite(8),
     compteurSpriteNiveau(8),
+    sizeButtonPlaySingle(120),
+    XToCenter(290),
+    YToCenter(90),
     sprites_()
 {
     // initialisation presenceGrille_
@@ -73,6 +76,10 @@ void Game::initialize()
     window_ = new Window("TETRIS", 800, 600);
     window_->initialize();
 
+    // on centre le bouton
+    XCoordButtonPlaySingle = window_->width()/2 - sizeButtonPlaySingle/2;
+    YCoordButtonPlaySingle = window_->height()/2 - sizeButtonPlaySingle/2;
+
     planche_ = new Surface();
     const std::string image = "./spritescopie2.bmp";
     planche_->load(image.c_str());
@@ -96,7 +103,6 @@ void Game::initialize()
     // sprites_.emplace_back(new Sprite(planche_, 140, 0, largeur_carre_, largeur_carre_));
     // Points
     sprites_.emplace_back(new Sprite(planche_, 0, 20, 53, 20));
-    window_->draw(*sprites_[7], -100, 20);
     // Numero
     sprites_.emplace_back(new Sprite(planche_, 0, 41, 12, 18)); // 1
     sprites_.emplace_back(new Sprite(planche_, 15, 41, 12, 18));
@@ -110,7 +116,12 @@ void Game::initialize()
     sprites_.emplace_back(new Sprite(planche_, 135, 41, 12, 18));
     // Niveau
     sprites_.emplace_back(new Sprite(planche_, 0, 60, 62, 20));
-    window_->draw(*sprites_[18], 250, 20);
+
+    // bouton play
+    sprites_.emplace_back(new Sprite(planche_, 0, 79, sizeButtonPlaySingle, sizeButtonPlaySingle));
+
+    // bloc noir
+    sprites_.emplace_back(new Sprite(planche_, 165, 0, largeur_carre_, largeur_carre_));
 }
 
 void Game::finalize()
@@ -168,15 +179,35 @@ void Game::keyboard(const std::uint8_t *keys)
     }
 }
 
-void Game::draw(double dt)
+void Game::clearForDraw()
 {
+    Sprite *sfond = sprites_[20]; // bloc noir 
+    for (int j = 0, h = window_->width(); j <= h; j += sfond->height())
+    {
+        for (int i = 0, w = window_->height(); i <= w; i += sfond->width())
+        {
+            window_->draw(*sfond, i, j);
+        }
+    }
+}
+
+void Game::drawMenu(double dt)
+{
+    window_->draw(*sprites_[19], XCoordButtonPlaySingle, YCoordButtonPlaySingle);
+}
+
+void Game::drawSingleGame(double dt)
+{
+    window_->draw(*sprites_[7], XToCenter - 100, YToCenter + 20);
+    window_->draw(*sprites_[18], XToCenter + 250, YToCenter + 20);
+
     // affichage grille + blocs deja fini
     for (int i = 0, h = 0; i < NB_COL; h += largeur_carre_, i++)
     {
         for (int j = 0, w = 0; j < NB_ROWS; w += largeur_carre_, j++)
         {
             int color = presenceGrille_[i][j];
-            window_->draw(*sprites_[color], h, w);
+            window_->draw(*sprites_[color], XToCenter + h, YToCenter + w);
         }
     }
 
@@ -245,7 +276,7 @@ void Game::draw(double dt)
         const int y = current_bloc_->getPositionY();
 
         const int tileSize = sprites_[indice_color_]->height();
-        window_->draw(*sprites_[indice_color_], x + p.first * tileSize, y + p.second * tileSize);        
+        window_->draw(*sprites_[indice_color_], XToCenter + x + p.first * tileSize, YToCenter + y + p.second * tileSize);        
     }
 
 
@@ -283,7 +314,6 @@ void Game::draw(double dt)
         lastGravity_ = frameID_;
     }
 }
-
 
 void Game::update_presenceGrille()
 {
@@ -395,7 +425,6 @@ bool Game::GameOver(){
 }
 
 /*
-    TODO verifier si collision avec bloc deja present
     - Checker si le deplacement est possible
     - Mettre a jour pos_cur_bloc
 
@@ -482,6 +511,9 @@ void Game::loop()
     Uint64 now = SDL_GetPerformanceCounter(); // timers
     Uint64 prev = now;
 
+    void (Game::*pdraw)(double); // pointeur de la fonction draw
+    pdraw = &Game::drawMenu; // au debut on affiche le menu
+
     //bool quit = false;
     while (!quit)
     {
@@ -492,9 +524,22 @@ void Game::loop()
         {
             switch (event.type)
             {
-            case SDL_QUIT:
-                quit = true;
-                break;
+                case SDL_QUIT:
+                    quit = true;
+                    break;
+
+                case SDL_MOUSEBUTTONDOWN:
+                    printf("mouse click %d\n", event.button.button);
+                    printf("mouse X position %d\n", event.button.x);
+                    printf("mouse Y position %d\n", event.button.y);
+                    int diffX = event.button.x - XCoordButtonPlaySingle;
+                    int diffY = event.button.y - YCoordButtonPlaySingle;
+                    if ((diffX > 0) && (diffX < sizeButtonPlaySingle) && (diffY > 0) && (diffY < sizeButtonPlaySingle))
+                    {
+                        clearForDraw();
+                        pdraw = &Game::drawSingleGame; // on affiche le jeu
+                    }
+                    break;
             }
         }
 
@@ -507,7 +552,9 @@ void Game::loop()
         prev = now;
         now = SDL_GetPerformanceCounter();
         double delta_t = (double)((now - prev) / (double)SDL_GetPerformanceFrequency());
-        draw(delta_t);
+        // draw(delta_t);
+        (*this.*pdraw)(delta_t);
+        // (Game::(*pdraw))(delta_t);
 
         // Update window (refresh)
         window_->update();
