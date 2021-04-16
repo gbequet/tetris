@@ -9,7 +9,6 @@
 #include <vector>
 #include <ctime>
 #include <cstdlib>
-
 #include "window.h"
 #include "surface.h"
 #include "sprite.h"
@@ -45,6 +44,7 @@ Game::Game()
     XToCenter(290),
     YToCenter(90),
     sprites_()
+
 {
     // initialisation presenceGrille_
     for (size_t i = 0; i < NB_COL; i++)
@@ -120,6 +120,9 @@ void Game::initialize()
 
     // bouton play
     sprites_.emplace_back(new Sprite(planche_, 0, 79, sizeButtonPlaySingle, sizeButtonPlaySingle));
+    
+    // bloc noir
+    sprites_.emplace_back(new Sprite(planche_, 160, 0, 12, 18));
 }
 
 void Game::finalize()
@@ -337,6 +340,7 @@ void Game::update_presenceGrille()
             if(compteurPoints % 10 == 0)
             {
                 niveau++;
+                window_->draw(*sprites_[20], XToCenter + 270, YToCenter + 50);
                 window_->draw(*sprites_[compteurSpriteNiveau], XToCenter + 270, YToCenter + 50);
                 compteurSpriteNiveau++;
                 vitesseGravite-=2;
@@ -344,46 +348,60 @@ void Game::update_presenceGrille()
             // va jusqu'à 29 pour l'instant et niveau jusqu'à 9
             if(compteurPoints <= 8)
             {
+                window_->draw(*sprites_[20], XToCenter - 80, YToCenter + 50);
                 window_->draw(*sprites_[compteurSprite], XToCenter - 80, YToCenter + 50);
                 compteurSprite++;
             } 
             else if(compteurPoints == 9)
             {
+                window_->draw(*sprites_[20], XToCenter - 80, YToCenter + 50);
                 window_->draw(*sprites_[compteurSprite], XToCenter - 80, YToCenter + 50);
                 compteurSprite = 8;
             }
             else if(compteurPoints == 10) 
             {
+                window_->draw(*sprites_[20], XToCenter - 90, YToCenter + 50);
+                window_->draw(*sprites_[20], XToCenter - 80, YToCenter + 50);
                 window_->draw(*sprites_[compteurSprite], XToCenter - 90, YToCenter + 50);
                 window_->draw(*sprites_[17], XToCenter - 80, YToCenter + 50);
                 compteurSprite++;
             }
             else if(compteurPoints >= 11 && compteurPoints <= 17) 
             {
+                window_->draw(*sprites_[20], XToCenter - 90, YToCenter + 50);
+                window_->draw(*sprites_[20], XToCenter - 80, YToCenter + 50);
                 window_->draw(*sprites_[8], XToCenter - 90, YToCenter + 50);
                 window_->draw(*sprites_[compteurSprite], XToCenter - 80, YToCenter + 50);
                 compteurSprite++;
             }
             else if(compteurPoints == 18)
             {
+                window_->draw(*sprites_[20], XToCenter - 90, YToCenter + 50);
+                window_->draw(*sprites_[20], XToCenter - 80, YToCenter + 50);
                 window_->draw(*sprites_[8], XToCenter - 90, YToCenter + 50);
                 window_->draw(*sprites_[compteurSprite], XToCenter - 80, YToCenter + 50);
                 compteurSprite = 8;
             }
             else if(compteurPoints == 19)
             {
+                window_->draw(*sprites_[20], XToCenter - 90, YToCenter + 50);
+                window_->draw(*sprites_[20], XToCenter - 80, YToCenter + 50);
                 window_->draw(*sprites_[8], XToCenter - 90, YToCenter + 50);
                 window_->draw(*sprites_[16], XToCenter - 80, YToCenter + 50);
                 compteurSprite = 8;
             }
             else if(compteurPoints == 20) 
             {
+                window_->draw(*sprites_[20], XToCenter - 90, YToCenter + 50);
+                window_->draw(*sprites_[20], XToCenter - 80, YToCenter + 50);
                 window_->draw(*sprites_[9], XToCenter - 90, YToCenter + 50);
                 window_->draw(*sprites_[17], XToCenter - 80, YToCenter + 50);
                 compteurSprite = 8;
             }
             else if(compteurPoints >= 21 && compteurPoints <= 29) 
             {
+                window_->draw(*sprites_[20], XToCenter - 90, YToCenter + 50);
+                window_->draw(*sprites_[20], XToCenter - 80, YToCenter + 50);
                 window_->draw(*sprites_[9], XToCenter - 90, YToCenter + 50);
                 window_->draw(*sprites_[compteurSprite], XToCenter - 80, YToCenter + 50);
                 compteurSprite++;
