@@ -29,6 +29,7 @@ protected:
     Window *window_;
     void drawSingleGame(double dt);
     void drawMenu(double dt);
+    void drawGameOver(double dt);
     void keyboard(const std::uint8_t *keys);
 
     bool check_collision(int situation);

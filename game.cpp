@@ -121,8 +121,9 @@ void Game::initialize()
     // bouton play
     sprites_.emplace_back(new Sprite(planche_, 0, 79, sizeButtonPlaySingle, sizeButtonPlaySingle));
 
-    // bloc noir
-    sprites_.emplace_back(new Sprite(planche_, 160, 0, 80, 80));
+    // Game Over 
+    // marche pas je comprends pas pk
+    // sprites_.emplace_back(new Sprite(planche_, 0, 190, 173, 27));
 }
 
 void Game::finalize()
@@ -130,7 +131,7 @@ void Game::finalize()
     gameOver = false;
     compteurPoints = 0;
     niveau = 0;
-    
+
     // reinitialisation presenceGrille_
     for (size_t i = 0; i < NB_COL; i++)
     {
@@ -189,6 +190,11 @@ void Game::keyboard(const std::uint8_t *keys)
             }
         }
     }
+}
+
+void Game::drawGameOver(double dt)
+{
+    window_->draw(*sprites_[20], XCoordButtonPlaySingle, YCoordButtonPlaySingle);
 }
 
 void Game::drawMenu(double dt)
@@ -266,6 +272,11 @@ void Game::drawSingleGame(double dt)
         need_new_bloc_ = false;
     }
 
+    if (check_collision(4))
+    {
+        gameOver = true;
+    }
+
     // affichage du bloc courant
     int rotation = current_bloc_->getCurTile();
     const GraphicsObject::TShape &shapeTiles = current_bloc_->tiles_[rotation];
@@ -302,11 +313,6 @@ void Game::drawSingleGame(double dt)
             }
 
             update_presenceGrille();
-
-            if(GameOver()){
-                printf("Fini!\n");
-                exit(2);
-            } 
 
             need_new_bloc_ = true; // on demande un nouveau bloc
         }
@@ -416,9 +422,6 @@ void Game::make_bloc_fall(int a)
 bool Game::GameOver(){
     for(int i = 4; i <= 7; i++ ){
         if(presenceGrille_[i][0] == 1) {
-            //return true;
-            //exit(2);
-            // quit = true;
             gameOver = true;
         }
     }
@@ -434,6 +437,7 @@ bool Game::GameOver(){
     1 -> deplacement gauche
     2 -> deplacement droite
     3 -> rotation
+    4 -> game over
 
     Effet de bord : met a jour pos_cur_bloc
     Renvoie true si il y'aurait une collision, false sinon
@@ -496,6 +500,17 @@ bool Game::check_collision(int situation)
         for (const auto &p : tmpTiles)
         {
             if ((p.first + std::get<0>(pos_cur_bloc) >= NB_COL) || (p.first + std::get<0>(pos_cur_bloc) < 0) || (p.second + std::get<1>(pos_cur_bloc) >= NB_ROWS))
+                return true;
+        }
+        break;
+
+    // game over
+    case 4:
+        for (const auto &p : tmpTiles)
+        {
+            futur_posX = p.first + std::get<0>(pos_cur_bloc);
+            futur_posY = p.second + std::get<1>(pos_cur_bloc);
+            if (presenceGrille_[futur_posX][futur_posY] != 0)
                 return true;
         }
         break;
