@@ -29,7 +29,6 @@ protected:
     Window *window_;
     void drawSingleGame(double dt);
     void drawMenu(double dt);
-    void clearForDraw();
     void keyboard(const std::uint8_t *keys);
 
     bool check_collision(int situation);
@@ -51,6 +50,7 @@ private:
     int niveau; // affiche le niveau du jeu (incrémente chaque 10 points)
     int vitesseGravite; // change à partir d'un certain niveau pour augmenter la difficulté
     bool quit; // pour quitter le jeu
+    bool gameOver;
     int compteurSprite; // compteur pour afficher les points
     int compteurSpriteNiveau; // compteur pour afficher les niveaux
     int XCoordButtonPlaySingle;

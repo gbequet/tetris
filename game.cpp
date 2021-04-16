@@ -38,6 +38,7 @@ Game::Game()
     niveau(0),
     vitesseGravite(100),
     quit(false),
+    gameOver(false),
     compteurSprite(8),
     compteurSpriteNiveau(8),
     sizeButtonPlaySingle(120),
@@ -126,7 +127,18 @@ void Game::initialize()
 
 void Game::finalize()
 {
-    // TODO
+    gameOver = false;
+    compteurPoints = 0;
+    niveau = 0;
+    
+    // reinitialisation presenceGrille_
+    for (size_t i = 0; i < NB_COL; i++)
+    {
+        for (size_t j = 0; j < NB_ROWS; j++)
+        {
+            presenceGrille_[i][j] = 0;
+        }
+    }
 }
 
 void Game::keyboard(const std::uint8_t *keys)
@@ -406,7 +418,8 @@ bool Game::GameOver(){
         if(presenceGrille_[i][0] == 1) {
             //return true;
             //exit(2);
-            quit = true;
+            // quit = true;
+            gameOver = true;
         }
     }
     return false;
@@ -505,11 +518,16 @@ void Game::loop()
     //bool quit = false;
     while (!quit)
     {
-
         // Event management
         SDL_Event event;
         while (!quit && SDL_PollEvent(&event))
         {
+            if (gameOver)
+            {
+                window_->clear();
+                pdraw = &Game::drawMenu;
+                finalize();
+            }
             switch (event.type)
             {
                 case SDL_QUIT:
@@ -517,12 +535,15 @@ void Game::loop()
                     break;
 
                 case SDL_MOUSEBUTTONDOWN:
-                    int diffX = event.button.x - XCoordButtonPlaySingle;
-                    int diffY = event.button.y - YCoordButtonPlaySingle;
-                    if ((diffX > 0) && (diffX < sizeButtonPlaySingle) && (diffY > 0) && (diffY < sizeButtonPlaySingle))
+                    if (pdraw == &Game::drawMenu)
                     {
-                        window_->clear();
-                        pdraw = &Game::drawSingleGame; // on affiche le jeu
+                        int diffX = event.button.x - XCoordButtonPlaySingle;
+                        int diffY = event.button.y - YCoordButtonPlaySingle;
+                        if ((diffX > 0) && (diffX < sizeButtonPlaySingle) && (diffY > 0) && (diffY < sizeButtonPlaySingle))
+                        {
+                            window_->clear();
+                            pdraw = &Game::drawSingleGame; // on affiche le jeu
+                        }
                     }
                     break;
             }
