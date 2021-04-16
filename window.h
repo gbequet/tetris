@@ -7,6 +7,7 @@
 class Surface;
 class Sprite;
 
+
 // Classe pour afficher la fênetre du jeu Tetris
 class Window
 {

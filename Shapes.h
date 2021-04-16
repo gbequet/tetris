@@ -6,21 +6,22 @@
 #include "GraphicsObject.h"
 
 namespace Shapes
+
 {
     /////////////
     // Shape T //
     /////////////
     class ShapeT : public GraphicsObject
     {
-    public:
-        ShapeT();
-        ShapeT(int x, int y);
-        virtual ~ShapeT();
+        public:
+            ShapeT();
+            ShapeT(int x, int y);
+            virtual ~ShapeT();
 
-    protected:
+        protected:
 
-    private:
-        int current_rotation_;
+        private:
+            int current_rotation_;
     };
 
     /////////////
@@ -28,15 +29,15 @@ namespace Shapes
     /////////////
     class ShapeZ : public GraphicsObject
     {
-    public:
-        ShapeZ();
-        ShapeZ(int x, int y);
-        virtual ~ShapeZ();
+        public:
+            ShapeZ();
+            ShapeZ(int x, int y);
+            virtual ~ShapeZ();
 
-    protected:
-    
-    private:
-        int current_rotation_;
+        protected:
+        
+        private:
+            int current_rotation_;
     };
 
     /////////////
@@ -44,15 +45,15 @@ namespace Shapes
     /////////////
     class ShapeI : public GraphicsObject
     {
-    public:
-        ShapeI();
-        ShapeI(int x, int y);
-        virtual ~ShapeI();
+        public:
+            ShapeI();
+            ShapeI(int x, int y);
+            virtual ~ShapeI();
 
-    protected:
-    
-    private:
-        int current_rotation_;
+        protected:
+        
+        private:
+            int current_rotation_;
     };
 
     /////////////
@@ -60,15 +61,15 @@ namespace Shapes
     /////////////
     class ShapeO : public GraphicsObject
     {
-    public:
-        ShapeO();
-        ShapeO(int x, int y);
-        virtual ~ShapeO();
+        public:
+            ShapeO();
+            ShapeO(int x, int y);
+            virtual ~ShapeO();
 
-    protected:
-    
-    private:
-        int current_rotation_;
+        protected:
+        
+        private:
+            int current_rotation_;
     };
 
     /////////////
@@ -76,15 +77,15 @@ namespace Shapes
     /////////////
     class ShapeL : public GraphicsObject
     {
-    public:
-        ShapeL();
-        ShapeL(int x, int y);
-        virtual ~ShapeL();
+        public:
+            ShapeL();
+            ShapeL(int x, int y);
+            virtual ~ShapeL();
 
-    protected:
-    
-    private:
-        int current_rotation_;
+        protected:
+        
+        private:
+            int current_rotation_;
     };
 
     /////////////
@@ -92,15 +93,15 @@ namespace Shapes
     /////////////
     class ShapeJ : public GraphicsObject
     {
-    public:
-        ShapeJ();
-        ShapeJ(int x, int y);
-        virtual ~ShapeJ();
+        public:
+            ShapeJ();
+            ShapeJ(int x, int y);
+            virtual ~ShapeJ();
 
-    protected:
-    
-    private:
-        int current_rotation_;
+        protected:
+        
+        private:
+            int current_rotation_;
     };
 
 
@@ -109,15 +110,15 @@ namespace Shapes
     /////////////
     class ShapeS : public GraphicsObject
     {
-    public:
-        ShapeS();
-        ShapeS(int x, int y);
-        virtual ~ShapeS();
+        public:
+            ShapeS();
+            ShapeS(int x, int y);
+            virtual ~ShapeS();
 
-    protected:
-    
-    private:
-        int current_rotation_;
+        protected:
+        
+        private:
+            int current_rotation_;
     };
 }
 

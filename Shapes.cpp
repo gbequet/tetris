@@ -6,8 +6,8 @@ using namespace Shapes;
 // Shape T //
 /////////////
 
-ShapeT::ShapeT()
-    : GraphicsObject(), current_rotation_(0)
+ShapeT::ShapeT() : 
+    GraphicsObject(), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(1, 0), std::make_pair(0, 1)};
@@ -16,8 +16,9 @@ ShapeT::ShapeT()
     tiles_[3] = {std::make_pair(0, 0), std::make_pair(0, 1), std::make_pair(0, 2), std::make_pair(1, 1)};
 }
 
-ShapeT::ShapeT(int x, int y)
-    : GraphicsObject(x, y), current_rotation_(0)
+
+ShapeT::ShapeT(int x, int y) :
+    GraphicsObject(x, y), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(1, 0), std::make_pair(0, 1)};
@@ -25,6 +26,7 @@ ShapeT::ShapeT(int x, int y)
     tiles_[2] = {std::make_pair(0, 0), std::make_pair(-1, 1), std::make_pair(0, 1), std::make_pair(1, 1)};
     tiles_[3] = {std::make_pair(0, 0), std::make_pair(0, 1), std::make_pair(0, 2), std::make_pair(1, 1)};
 }
+
 
 ShapeT::~ShapeT()
 {
@@ -35,8 +37,8 @@ ShapeT::~ShapeT()
 // Shape Z //
 /////////////
 
-ShapeZ::ShapeZ()
-    : GraphicsObject(), current_rotation_(0)
+ShapeZ::ShapeZ() : 
+    GraphicsObject(), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(0, 1), std::make_pair(1, 1)};
@@ -45,8 +47,9 @@ ShapeZ::ShapeZ()
     tiles_[3] = tiles_[1];
 }
 
-ShapeZ::ShapeZ(int x, int y)
-    : GraphicsObject(x, y), current_rotation_(0)
+
+ShapeZ::ShapeZ(int x, int y) : 
+    GraphicsObject(x, y), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(0, 1), std::make_pair(1, 1)};
@@ -54,6 +57,7 @@ ShapeZ::ShapeZ(int x, int y)
     tiles_[2] = tiles_[0];
     tiles_[3] = tiles_[1];
 }
+
 
 ShapeZ::~ShapeZ()
 {
@@ -64,8 +68,8 @@ ShapeZ::~ShapeZ()
 // Shape I //
 /////////////
 
-ShapeI::ShapeI()
-    : GraphicsObject(), current_rotation_(0)
+ShapeI::ShapeI() :
+    GraphicsObject(), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(0, 1), std::make_pair(1, 1)};
@@ -74,8 +78,9 @@ ShapeI::ShapeI()
     tiles_[3] = tiles_[1];
 }
 
-ShapeI::ShapeI(int x, int y)
-    : GraphicsObject(x, y), current_rotation_(0)
+
+ShapeI::ShapeI(int x, int y): 
+    GraphicsObject(x, y), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(1, 0), std::make_pair(2, 0)};
@@ -83,6 +88,7 @@ ShapeI::ShapeI(int x, int y)
     tiles_[2] = tiles_[0];
     tiles_[3] = tiles_[1];
 }
+
 
 ShapeI::~ShapeI()
 {
@@ -93,8 +99,8 @@ ShapeI::~ShapeI()
 // Shape O //
 /////////////
 
-ShapeO::ShapeO()
-    : GraphicsObject(), current_rotation_(0)
+ShapeO::ShapeO(): 
+    GraphicsObject(), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(-1, 1), std::make_pair(0, 1)};
@@ -103,8 +109,9 @@ ShapeO::ShapeO()
     tiles_[3] = tiles_[0];
 }
 
-ShapeO::ShapeO(int x, int y)
-    : GraphicsObject(x, y), current_rotation_(0)
+
+ShapeO::ShapeO(int x, int y) : 
+    GraphicsObject(x, y), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(-1, 1), std::make_pair(0, 1)};
@@ -112,6 +119,7 @@ ShapeO::ShapeO(int x, int y)
     tiles_[2] = tiles_[0];
     tiles_[3] = tiles_[0];
 }
+
 
 ShapeO::~ShapeO()
 {
@@ -122,8 +130,8 @@ ShapeO::~ShapeO()
 // Shape L //
 /////////////
 
-ShapeL::ShapeL()
-    : GraphicsObject(), current_rotation_(0)
+ShapeL::ShapeL() : 
+    GraphicsObject(), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(1, 0), std::make_pair(-1, 1)};
@@ -132,8 +140,9 @@ ShapeL::ShapeL()
     tiles_[3] = {std::make_pair(-1, 0), std::make_pair(-1, 1), std::make_pair(-1, 2), std::make_pair(0, 2)};
 }
 
-ShapeL::ShapeL(int x, int y)
-    : GraphicsObject(x, y), current_rotation_(0)
+
+ShapeL::ShapeL(int x, int y) :
+    GraphicsObject(x, y), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(1, 0), std::make_pair(-1, 1)};
@@ -141,6 +150,7 @@ ShapeL::ShapeL(int x, int y)
     tiles_[2] = {std::make_pair(0, 1), std::make_pair(-1, 1), std::make_pair(1, 0), std::make_pair(1, 1)};
     tiles_[3] = {std::make_pair(-1, 0), std::make_pair(-1, 1), std::make_pair(-1, 2), std::make_pair(0, 2)};
 }
+
 
 ShapeL::~ShapeL()
 {
@@ -151,8 +161,8 @@ ShapeL::~ShapeL()
 // Shape J //
 /////////////
 
-ShapeJ::ShapeJ()
-    : GraphicsObject(), current_rotation_(0)
+ShapeJ::ShapeJ() : 
+    GraphicsObject(), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(1, 0), std::make_pair(1, 1)};
@@ -161,8 +171,9 @@ ShapeJ::ShapeJ()
     tiles_[3] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(-1, 1), std::make_pair(-1, 2)};
 }
 
-ShapeJ::ShapeJ(int x, int y)
-    : GraphicsObject(x, y), current_rotation_(0)
+
+ShapeJ::ShapeJ(int x, int y) :
+    GraphicsObject(x, y), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(1, 0), std::make_pair(1, 1)};
@@ -170,6 +181,7 @@ ShapeJ::ShapeJ(int x, int y)
     tiles_[2] = {std::make_pair(-1, 0), std::make_pair(-1, 1), std::make_pair(0, 1), std::make_pair(1, 1)};
     tiles_[3] = {std::make_pair(-1, 0), std::make_pair(0, 0), std::make_pair(-1, 1), std::make_pair(-1, 2)};
 }
+
 
 ShapeJ::~ShapeJ()
 {
@@ -180,8 +192,8 @@ ShapeJ::~ShapeJ()
 // Shape S //
 /////////////
 
-ShapeS::ShapeS()
-    : GraphicsObject(), current_rotation_(0)
+ShapeS::ShapeS() :
+    GraphicsObject(), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(0, 0), std::make_pair(1, 0), std::make_pair(0, 1), std::make_pair(-1, 1)};
@@ -190,8 +202,9 @@ ShapeS::ShapeS()
     tiles_[3] = tiles_[1];
 }
 
-ShapeS::ShapeS(int x, int y)
-    : GraphicsObject(x, y), current_rotation_(0)
+
+ShapeS::ShapeS(int x, int y) :
+    GraphicsObject(x, y), current_rotation_(0)
 {
     tiles_.resize(4);
     tiles_[0] = {std::make_pair(0, 0), std::make_pair(1, 0), std::make_pair(0, 1), std::make_pair(-1, 1)};
@@ -199,6 +212,7 @@ ShapeS::ShapeS(int x, int y)
     tiles_[2] = tiles_[0];
     tiles_[3] = tiles_[1];
 }
+
 
 ShapeS::~ShapeS()
 {

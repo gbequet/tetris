@@ -8,6 +8,7 @@ struct SDL_Surface;
 class Sprite;
 class Window;
 
+
 class Surface
 {
     friend class Window;
@@ -15,16 +16,13 @@ class Surface
     public:
         Surface();
         Surface(const std::string &template_file);
-
         virtual ~Surface();
-
-        void initialize();
-        void finalize();
 
         void load(const std::string &template_file);
 
         void draw(const Sprite &sprite, int x, int y);
         void drawLevel(const Sprite &sprite, int x, int y);
+
         SDL_Surface *getSurface();
 
 

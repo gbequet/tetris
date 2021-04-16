@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 
 	game->initialize();
 
-    // audio
+    // Audio
     if (SDL_Init(SDL_INIT_AUDIO) != 0)
 	{
 		return 1;
@@ -33,10 +33,11 @@ int main(int argc, char **argv)
     SDL_PauseAudioDevice(deviceId, 0);
 
 	game->loop();	
+
 	clock_t end = clock();
 	double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-
 	printf("Temps écoulé: %f\n", time_spent);
+
 	game->finalize();
 
 	delete game;
@@ -45,7 +46,6 @@ int main(int argc, char **argv)
     SDL_CloseAudioDevice(deviceId);
 	SDL_FreeWAV(wavBuffer);
 	SDL_Quit();
- 
 
 	return 0;
 }

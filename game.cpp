@@ -45,6 +45,7 @@ Game::Game()
     YToCenter(90),
     sprites_()
 
+
 {
     // initialisation presenceGrille_
     for (size_t i = 0; i < NB_COL; i++)
@@ -55,6 +56,7 @@ Game::Game()
         }
     }
 }
+
 
 Game::~Game()
 {
@@ -82,7 +84,7 @@ void Game::initialize()
     YCoordButtonPlaySingle = window_->height()/2 - sizeButtonPlaySingle/2;
 
     planche_ = new Surface();
-    const std::string image = "./spritescopie2.bmp";
+    const std::string image = "./sprites.bmp";
     planche_->load(image.c_str());
 
     // Initialize sprites
@@ -102,10 +104,12 @@ void Game::initialize()
     sprites_.emplace_back(new Sprite(planche_, 120, 0, largeur_carre_, largeur_carre_));
     // bloc bleu clair
     // sprites_.emplace_back(new Sprite(planche_, 140, 0, largeur_carre_, largeur_carre_));
+
     // Points
     sprites_.emplace_back(new Sprite(planche_, 0, 20, 53, 20));
+
     // Numero
-    sprites_.emplace_back(new Sprite(planche_, 0, 41, 12, 18)); // 1
+    sprites_.emplace_back(new Sprite(planche_, 0, 41, 12, 18));
     sprites_.emplace_back(new Sprite(planche_, 15, 41, 12, 18));
     sprites_.emplace_back(new Sprite(planche_, 30, 41, 12, 18));
     sprites_.emplace_back(new Sprite(planche_, 45, 41, 12, 18));
@@ -115,6 +119,7 @@ void Game::initialize()
     sprites_.emplace_back(new Sprite(planche_, 105, 41, 12, 18));
     sprites_.emplace_back(new Sprite(planche_, 120, 41, 12, 18));
     sprites_.emplace_back(new Sprite(planche_, 135, 41, 12, 18));
+
     // Niveau
     sprites_.emplace_back(new Sprite(planche_, 0, 60, 62, 20));
 
@@ -124,6 +129,7 @@ void Game::initialize()
     // bloc noir
     sprites_.emplace_back(new Sprite(planche_, 160, 0, 12, 18));
 }
+
 
 void Game::finalize()
 {
@@ -141,9 +147,10 @@ void Game::finalize()
     }
 }
 
+
 void Game::keyboard(const std::uint8_t *keys)
 {
-    if (frameID_ - lastMove_ > 50) // ca evite d'aller trop vite ( enleve la condition tu verras haha ;) )
+    if (frameID_ - lastMove_ > 50) // ca evite d'aller trop vite
     {
         if (keys[SDL_SCANCODE_LEFT]){
             if (!check_collision(1))
@@ -191,15 +198,18 @@ void Game::keyboard(const std::uint8_t *keys)
     }
 }
 
+
 void Game::drawGameOver(double dt)
 {
     window_->draw(*sprites_[20], XCoordButtonPlaySingle, YCoordButtonPlaySingle);
 }
 
+
 void Game::drawMenu(double dt)
 {
     window_->draw(*sprites_[19], XCoordButtonPlaySingle, YCoordButtonPlaySingle);
 }
+
 
 void Game::drawSingleGame(double dt)
 {
@@ -289,7 +299,6 @@ void Game::drawSingleGame(double dt)
         window_->draw(*sprites_[indice_color_], XToCenter + x + p.first * tileSize, YToCenter + y + p.second * tileSize);        
     }
 
-
     frameID_++;
 
     // gravité
@@ -319,6 +328,7 @@ void Game::drawSingleGame(double dt)
         lastGravity_ = frameID_;
     }
 }
+
 
 void Game::update_presenceGrille()
 {
@@ -414,6 +424,7 @@ void Game::update_presenceGrille()
     }
 }
 
+
 void Game::clear_line(int i)
 {
     for (int j = 0; j < NB_COL; j++)
@@ -421,6 +432,7 @@ void Game::clear_line(int i)
         presenceGrille_[j][i] = 0;
     }
 }
+
 
 void Game::make_bloc_fall(int a)
 {
@@ -432,6 +444,7 @@ void Game::make_bloc_fall(int a)
         }
     }
 }
+
 
 bool Game::GameOver(){
     for(int i = 4; i <= 7; i++ ){
@@ -467,74 +480,75 @@ bool Game::check_collision(int situation)
 
     switch (situation)
     {
-    // gravité
-    case 0:
-        for (const auto &p : shapeTiles)
-        {
-            futur_posX = p.first + std::get<0>(pos_cur_bloc);
-            futur_posY = p.second + std::get<1>(pos_cur_bloc) + 1;
-            if (futur_posY >= NB_ROWS)
-                return true;
-            if (presenceGrille_[futur_posX][futur_posY] != 0)
-                return true;
-        }
-        std::get<1>(pos_cur_bloc) += 1;
+        // gravité
+        case 0:
+            for (const auto &p : shapeTiles)
+            {
+                futur_posX = p.first + std::get<0>(pos_cur_bloc);
+                futur_posY = p.second + std::get<1>(pos_cur_bloc) + 1;
+                if (futur_posY >= NB_ROWS)
+                    return true;
+                if (presenceGrille_[futur_posX][futur_posY] != 0)
+                    return true;
+            }
+            std::get<1>(pos_cur_bloc) += 1;
+            break;
+
+        // gauche
+        case 1:
+            for (const auto &p : shapeTiles)
+            {
+                futur_posX = p.first + std::get<0>(pos_cur_bloc) - 1;
+                futur_posY = p.second + std::get<1>(pos_cur_bloc);
+                if (futur_posX < 0)
+                    return true;
+                if (presenceGrille_[futur_posX][futur_posY] != 0)
+                    return true;
+            }
+            std::get<0>(pos_cur_bloc) -= 1;
+            break;
+
+        // droite
+        case 2:
+            for (const auto &p : shapeTiles)
+            {
+                futur_posX = p.first + std::get<0>(pos_cur_bloc) + 1;
+                futur_posY = p.second + std::get<1>(pos_cur_bloc);
+                if (futur_posX >= NB_COL)
+                    return true;
+                if (presenceGrille_[futur_posX][futur_posY] != 0)
+                    return true;
+            }
+            std::get<0>(pos_cur_bloc) += 1;
+            break;
+
+        // rotation
+        case 3:
+            for (const auto &p : tmpTiles)
+            {
+                if ((p.first + std::get<0>(pos_cur_bloc) >= NB_COL) || (p.first + std::get<0>(pos_cur_bloc) < 0) || (p.second + std::get<1>(pos_cur_bloc) >= NB_ROWS))
+                    return true;
+            }
+            break;
+
+        // game over
+        case 4:
+            for (const auto &p : tmpTiles)
+            {
+                futur_posX = p.first + std::get<0>(pos_cur_bloc);
+                futur_posY = p.second + std::get<1>(pos_cur_bloc);
+                if (presenceGrille_[futur_posX][futur_posY] != 0)
+                    return true;
+            }
         break;
 
-    // gauche
-    case 1:
-        for (const auto &p : shapeTiles)
-        {
-            futur_posX = p.first + std::get<0>(pos_cur_bloc) - 1;
-            futur_posY = p.second + std::get<1>(pos_cur_bloc);
-            if (futur_posX < 0)
-                return true;
-            if (presenceGrille_[futur_posX][futur_posY] != 0)
-                return true;
-        }
-        std::get<0>(pos_cur_bloc) -= 1;
-        break;
-
-    // droite
-    case 2:
-        for (const auto &p : shapeTiles)
-        {
-            futur_posX = p.first + std::get<0>(pos_cur_bloc) + 1;
-            futur_posY = p.second + std::get<1>(pos_cur_bloc);
-            if (futur_posX >= NB_COL)
-                return true;
-            if (presenceGrille_[futur_posX][futur_posY] != 0)
-                return true;
-        }
-        std::get<0>(pos_cur_bloc) += 1;
-        break;
-
-    // rotation
-    case 3:
-        for (const auto &p : tmpTiles)
-        {
-            if ((p.first + std::get<0>(pos_cur_bloc) >= NB_COL) || (p.first + std::get<0>(pos_cur_bloc) < 0) || (p.second + std::get<1>(pos_cur_bloc) >= NB_ROWS))
-                return true;
-        }
-        break;
-
-    // game over
-    case 4:
-        for (const auto &p : tmpTiles)
-        {
-            futur_posX = p.first + std::get<0>(pos_cur_bloc);
-            futur_posY = p.second + std::get<1>(pos_cur_bloc);
-            if (presenceGrille_[futur_posX][futur_posY] != 0)
-                return true;
-        }
-        break;
-
-    default:
-        break;
+        default:
+            break;
     }
 
     return false;
 }
+
 
 void Game::loop()
 {
@@ -574,7 +588,7 @@ void Game::loop()
                             pdraw = &Game::drawSingleGame; // on affiche le jeu
                         }
                     }
-                    break;
+                break;
             }
         }
 
