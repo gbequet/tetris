@@ -9,6 +9,7 @@ class Sprite;
 class Window;
 
 
+// Classe pour la surface de la fenêtre
 class Surface
 {
     friend class Window;
@@ -31,12 +32,14 @@ class Surface
         Surface(SDL_Surface *surface);
         
         /**
-	    * Flag to tell whether or not to handle memory management of the underlying graphics library's surface
+	    * Flag to tell whether or not to handle memory 
+        * management of the underlying graphics library's surface
 	    */
         bool manageSurface_;
 
     private:
-        bool surface_matrix_[10][20]; // grille
+        // Grille du jeu (10 lignes et 20 colonnes)
+        bool surface_matrix_[10][20]; 
 };
 
 #endif

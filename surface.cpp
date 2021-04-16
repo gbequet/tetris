@@ -3,13 +3,14 @@
 #include "sprite.h"
 
 
-// Constructeurs
+// Constructeur
 Surface::Surface()
     : surface_(nullptr), manageSurface_(true)
 {
 }
 
 
+// Constructeur avec paramètres
 Surface::Surface(const std::string &template_file) : 
     surface_(nullptr), manageSurface_(true)
 {
@@ -34,12 +35,14 @@ Surface::~Surface()
 }
 
 
+// Getters Surface
 SDL_Surface *Surface::getSurface()
 {
     return surface_;
 }
 
 
+// Charger les images de BMP
 void Surface::load(const std::string &template_file)
 {
     surface_ = SDL_LoadBMP(template_file.c_str());
@@ -47,6 +50,7 @@ void Surface::load(const std::string &template_file)
 }
 
 
+// Fonction qui dessine les blocs pour le jeu
 void Surface::draw(const Sprite &sprite, int x, int y)
 {
     SDL_Rect dst{x, y, 0, 0};
@@ -54,6 +58,7 @@ void Surface::draw(const Sprite &sprite, int x, int y)
 }
 
 
+// Fonction qui affiche les chiffres pour les points et niveaux 
 void Surface::drawLevel(const Sprite &sprite, int x, int y)
 {
     SDL_Rect dst{x, y, 0, 0};

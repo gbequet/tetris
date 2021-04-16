@@ -2,6 +2,10 @@
 #include "game.h"
 #include "time.h"
 
+
+// Fonction main 
+// Démarre le jeu avec différents appels
+// Lance aussi le son et le temps écoulé
 int main(int argc, char **argv)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -10,6 +14,8 @@ int main(int argc, char **argv)
 	}	
 
 	Game *game = new Game();
+
+	// Chronomètre
 	clock_t start = clock();
 
 	game->initialize();
@@ -20,7 +26,7 @@ int main(int argc, char **argv)
 		return 1;
 	}	
 	
-    // load WAV file
+    // Charge fichier WAV pour audio
     SDL_AudioSpec wavSpec;
     Uint32 wavLength;
     Uint8 *wavBuffer;
@@ -28,12 +34,13 @@ int main(int argc, char **argv)
     SDL_LoadWAV("POL-hitch-a-ride-long.wav", &wavSpec, &wavBuffer, &wavLength);
     SDL_AudioDeviceID deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpec, NULL, 0);
 
-    // play audio
+    // Démarre audio
     SDL_QueueAudio(deviceId, wavBuffer, wavLength);
     SDL_PauseAudioDevice(deviceId, 0);
 
 	game->loop();	
 
+	// Fin chronomètre
 	clock_t end = clock();
 	double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
 	printf("Temps écoulé: %f\n", time_spent);
@@ -43,6 +50,8 @@ int main(int argc, char **argv)
 	delete game;
 	game = nullptr;
 
+
+	// Nettoyage du SDL
     SDL_CloseAudioDevice(deviceId);
 	SDL_FreeWAV(wavBuffer);
 	SDL_Quit();

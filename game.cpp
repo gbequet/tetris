@@ -58,6 +58,7 @@ Game::Game()
 }
 
 
+// Constructeur du jeu
 Game::~Game()
 {
     for (auto sprite : sprites_)
@@ -74,12 +75,14 @@ Game::~Game()
     window_ = nullptr;
 }
 
+
+// Initalisation du jeu
 void Game::initialize()
 {
     window_ = new Window("TETRIS", 800, 600);
     window_->initialize();
 
-    // on centre le bouton
+    // On centre le bouton
     XCoordButtonPlaySingle = window_->width()/2 - sizeButtonPlaySingle/2;
     YCoordButtonPlaySingle = window_->height()/2 - sizeButtonPlaySingle/2;
 
@@ -87,20 +90,20 @@ void Game::initialize()
     const std::string image = "./sprites.bmp";
     planche_->load(image.c_str());
 
-    // Initialize sprites
-    // carreaux de la grille
+    // Initialisation des sprites
+    // Carreaux de la grille
     sprites_.emplace_back(new Sprite(planche_, 0, 0, largeur_carre_, largeur_carre_));
-    // bloc rouge
+    // Bloc rouge
     sprites_.emplace_back(new Sprite(planche_, 20, 0, largeur_carre_, largeur_carre_));
-    // bloc orange
+    // Bloc orange
     sprites_.emplace_back(new Sprite(planche_, 40, 0, largeur_carre_, largeur_carre_));
-    // bloc jaune
+    // Bloc jaune
     sprites_.emplace_back(new Sprite(planche_, 60, 0, largeur_carre_, largeur_carre_));
-    // bloc vert
+    // Bloc vert
     sprites_.emplace_back(new Sprite(planche_, 80, 0, largeur_carre_, largeur_carre_));
-    // bloc bleu
+    // Bloc bleu
     sprites_.emplace_back(new Sprite(planche_, 100, 0, largeur_carre_, largeur_carre_));
-    // bloc mauve
+    // Bloc mauve
     sprites_.emplace_back(new Sprite(planche_, 120, 0, largeur_carre_, largeur_carre_));
     // bloc bleu clair
     // sprites_.emplace_back(new Sprite(planche_, 140, 0, largeur_carre_, largeur_carre_));
@@ -123,14 +126,15 @@ void Game::initialize()
     // Niveau
     sprites_.emplace_back(new Sprite(planche_, 0, 60, 62, 20));
 
-    // bouton play
+    // Bouton play
     sprites_.emplace_back(new Sprite(planche_, 0, 79, sizeButtonPlaySingle, sizeButtonPlaySingle));
     
-    // bloc noir
+    // Bloc gris/noir
     sprites_.emplace_back(new Sprite(planche_, 160, 0, 12, 18));
 }
 
 
+// Restart du jeu
 void Game::finalize()
 {
     gameOver = false;
@@ -148,6 +152,8 @@ void Game::finalize()
 }
 
 
+// Fonction qui contient les différents appels pour les
+// touches des claviers
 void Game::keyboard(const std::uint8_t *keys)
 {
     if (frameID_ - lastMove_ > 50) // ca evite d'aller trop vite
@@ -199,18 +205,22 @@ void Game::keyboard(const std::uint8_t *keys)
 }
 
 
+// Affichage du bouton play à la fin du gameover
 void Game::drawGameOver(double dt)
 {
     window_->draw(*sprites_[20], XCoordButtonPlaySingle, YCoordButtonPlaySingle);
 }
 
 
+// Affichage du bouton play à la fin du gameover
 void Game::drawMenu(double dt)
 {
     window_->draw(*sprites_[19], XCoordButtonPlaySingle, YCoordButtonPlaySingle);
 }
 
 
+// Fonction qui gère tout ce qui a un rapport avec la grille,
+// les blocs (rotation, mouvement) et gravité
 void Game::drawSingleGame(double dt)
 {
     window_->draw(*sprites_[7], XToCenter - 100, YToCenter + 20);
@@ -234,10 +244,10 @@ void Game::drawSingleGame(double dt)
         std::uniform_real_distribution<double> couleur(1, 6);
         std::uniform_real_distribution<double> forme(0, 6);
 
-        // on tire une couleur au hasard ( entre 1 et 6 )
+        // On tire une couleur au hasard ( entre 1 et 6 )
         indice_color_ = int(couleur(gen));
 
-        // on initialise un nouveau bloc ( 5*largeur_carre_ pour qu'il soit au milieu )
+        // On initialise un nouveau bloc ( 5*largeur_carre_ pour qu'il soit au milieu )
         int indice_shape = int(forme(gen)); // ( 0=T ; 1=Z ; 2=I ; 3=O ; 4=L ; 5=J: 6=S)
 
         switch (indice_shape)
@@ -274,7 +284,7 @@ void Game::drawSingleGame(double dt)
             break;
         }
 
-        // on (re)initialise sa position
+        // On (re)initialise sa position
         std::get<0>(pos_cur_bloc) = NB_COL/2;
         std::get<1>(pos_cur_bloc) = 0;
 
@@ -286,7 +296,7 @@ void Game::drawSingleGame(double dt)
         }
     }
 
-    // affichage du bloc courant
+    // Affichage du bloc courant
     int rotation = current_bloc_->getCurTile();
     const GraphicsObject::TShape &shapeTiles = current_bloc_->tiles_[rotation];
 
@@ -301,17 +311,17 @@ void Game::drawSingleGame(double dt)
 
     frameID_++;
 
-    // gravité
+    // Gravité
     if (frameID_ - lastGravity_ > vitesseGravite)
     {
 
-        if (!check_collision(0)) // on le fait descendre
+        if (!check_collision(0)) // On le fait descendre
         {
             current_bloc_->setPositionY(current_bloc_->getPositionY() + largeur_carre_);
         }
-        else // il a atteint le fond ou a atteri sur un ancien bloc => on en envoi un nouveau
+        else // Il a atteint le fond ou a atteri sur un ancien bloc => on en envoie un nouveau
         {
-            // on met a jour presenceGrille_
+            // On met à jour presenceGrille_
             for (const auto &p : shapeTiles)
             {
                 int i = p.first + std::get<0>(pos_cur_bloc);
@@ -322,7 +332,7 @@ void Game::drawSingleGame(double dt)
 
             update_presenceGrille();
 
-            need_new_bloc_ = true; // on demande un nouveau bloc
+            need_new_bloc_ = true; // On demande un nouveau bloc
         }
 
         lastGravity_ = frameID_;
@@ -330,6 +340,8 @@ void Game::drawSingleGame(double dt)
 }
 
 
+// Mise à jour de la grille si une ligne est remplie et
+// affichage des points et niveaux
 void Game::update_presenceGrille()
 {
     bool rempli;
@@ -355,7 +367,7 @@ void Game::update_presenceGrille()
                 compteurSpriteNiveau++;
                 vitesseGravite-=2;
             }
-            // va jusqu'à 29 pour l'instant et niveau jusqu'à 9
+            // Va jusqu'à 29 pour l'instant et niveau jusqu'à 9
             if(compteurPoints <= 8)
             {
                 window_->draw(*sprites_[20], XToCenter - 80, YToCenter + 50);
@@ -425,6 +437,7 @@ void Game::update_presenceGrille()
 }
 
 
+// Effacement d'une ligne
 void Game::clear_line(int i)
 {
     for (int j = 0; j < NB_COL; j++)
@@ -434,6 +447,8 @@ void Game::clear_line(int i)
 }
 
 
+// Les lignes descendent si une ligne est remplie et
+// ensuite effacée
 void Game::make_bloc_fall(int a)
 {
     for (int i = a; i > 0; --i)
@@ -446,6 +461,7 @@ void Game::make_bloc_fall(int a)
 }
 
 
+// GameOver si un bloc arrive tout en haut de la grille
 bool Game::GameOver(){
     for(int i = 4; i <= 7; i++ ){
         if(presenceGrille_[i][0] == 1) {
@@ -454,6 +470,7 @@ bool Game::GameOver(){
     }
     return false;
 }
+
 
 /*
     - Checker si le deplacement est possible
@@ -480,7 +497,7 @@ bool Game::check_collision(int situation)
 
     switch (situation)
     {
-        // gravité
+        // Gravité
         case 0:
             for (const auto &p : shapeTiles)
             {
@@ -494,7 +511,7 @@ bool Game::check_collision(int situation)
             std::get<1>(pos_cur_bloc) += 1;
             break;
 
-        // gauche
+        // Gauche
         case 1:
             for (const auto &p : shapeTiles)
             {
@@ -508,7 +525,7 @@ bool Game::check_collision(int situation)
             std::get<0>(pos_cur_bloc) -= 1;
             break;
 
-        // droite
+        // Droite
         case 2:
             for (const auto &p : shapeTiles)
             {
@@ -522,7 +539,7 @@ bool Game::check_collision(int situation)
             std::get<0>(pos_cur_bloc) += 1;
             break;
 
-        // rotation
+        // Rotation
         case 3:
             for (const auto &p : tmpTiles)
             {
@@ -531,7 +548,7 @@ bool Game::check_collision(int situation)
             }
             break;
 
-        // game over
+        // Game over
         case 4:
             for (const auto &p : tmpTiles)
             {
@@ -550,15 +567,18 @@ bool Game::check_collision(int situation)
 }
 
 
+// La boucle du jeu 
 void Game::loop()
 {
-    Uint64 now = SDL_GetPerformanceCounter(); // timers
+    Uint64 now = SDL_GetPerformanceCounter(); // Timers
     Uint64 prev = now;
 
-    void (Game::*pdraw)(double); // pointeur de la fonction draw
-    pdraw = &Game::drawMenu; // au debut on affiche le menu
+    // Pointeur de la fonction draw
+    void (Game::*pdraw)(double); 
+    
+    // Au début on affiche le menu
+    pdraw = &Game::drawMenu; 
 
-    //bool quit = false;
     while (!quit)
     {
         // Event management
@@ -585,7 +605,8 @@ void Game::loop()
                         if ((diffX > 0) && (diffX < sizeButtonPlaySingle) && (diffY > 0) && (diffY < sizeButtonPlaySingle))
                         {
                             window_->clear();
-                            pdraw = &Game::drawSingleGame; // on affiche le jeu
+                            // On affiche le jeu
+                            pdraw = &Game::drawSingleGame; 
                         }
                     }
                 break;

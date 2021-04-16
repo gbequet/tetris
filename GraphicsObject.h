@@ -4,16 +4,19 @@
 #include <vector>
 #include <utility>
 
+// Classe pour la rotation des blocs et leurs positions
 class GraphicsObject
 {
     public:
         // Desctructor
         virtual ~GraphicsObject();
 
-        // Position
+        // Getters
         int getPositionX() const;
         int getPositionY() const;
         int getCurTile() const;
+
+        // Setters
         void setPositionX(int pValue);
         void setPositionY(int pValue);
         void setCurTile(int pValue);

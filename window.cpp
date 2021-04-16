@@ -5,7 +5,7 @@
 using namespace std;
 
 
-// Constructeurs
+// Constructeur
 Window::Window() : 
     pWindow_(nullptr), win_surf_(nullptr),
     width_(800), height_(600), title_("TETRIS")
@@ -13,6 +13,7 @@ Window::Window() :
 }
 
 
+// Constructeur avec paramètres
 Window::Window(const std::string &name, const int w, const int h) : 
     pWindow_(nullptr), win_surf_(nullptr),
     width_(w), height_(h), title_(name)
@@ -20,20 +21,21 @@ Window::Window(const std::string &name, const int w, const int h) :
 }
 
 
-// Getters
+// Getters width
 int Window::width() const
 {
     return width_;
 }
 
 
+// Getters height
 int Window::height() const
 {
     return height_;
 }
 
 
-// Initialisation
+// Initialisation de la fenêtre SDL
 void Window::initialize()
 {
     pWindow_ = SDL_CreateWindow(title_.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width_, height_, SDL_WINDOW_SHOWN);
@@ -42,26 +44,28 @@ void Window::initialize()
 }
 
 
-// Destruction de la fenetre pour SDL
+// Destruction de la fenetre SDL
 void Window::finalize()
 {
     SDL_DestroyWindow(pWindow_);
 }
 
 
-// Affichage d'un sprite sur la surface
+// Affichage d'un sprite dans la surface
 void Window::draw(const Sprite &sprite, int x, int y)
 {
     surface_->draw(sprite, x, y);
 }
 
 
+// Affichage des points et niveaux dans la surface
 void Window::drawLevel(const Sprite &sprite, int x, int y)
 {
     surface_->drawLevel(sprite, x, y);
 }
 
 
+// Efface fenêtre SDL
 void Window::clear()
 {
     SDL_Surface *surface = SDL_GetWindowSurface(pWindow_);
@@ -70,15 +74,14 @@ void Window::clear()
 }
 
 
+// Copier la surface de la fenêtre à l'écran
 void Window::update() const
 {
-    // Copy the window surface to the screen
     SDL_UpdateWindowSurface(pWindow_);
 }
 
 
-// Prendre la taille de la fenêtre 
-// Utile ? On verra par la suite
+// Taille de la fenêtre
 void Window::WinSize()
 {
     SDL_GetWindowSize(pWindow_, &width_, &height_);

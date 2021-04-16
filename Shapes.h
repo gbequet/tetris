@@ -6,6 +6,7 @@
 #include "GraphicsObject.h"
 
 namespace Shapes
+// Classes pour les différentes formes des blocs
 
 {
     /////////////

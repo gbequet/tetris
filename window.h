@@ -15,7 +15,7 @@ class Window
         Window();
         Window(const std::string &name, const int width, const int height);
 
-        // getters
+        // Getters
         int width() const;
         int height() const;
 

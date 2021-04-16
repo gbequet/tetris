@@ -6,6 +6,8 @@ using namespace Shapes;
 // Shape T //
 /////////////
 
+// Fonction pour créer le bloc T
+
 ShapeT::ShapeT() : 
     GraphicsObject(), current_rotation_(0)
 {
@@ -36,6 +38,8 @@ ShapeT::~ShapeT()
 /////////////
 // Shape Z //
 /////////////
+
+// Fonction pour créer le bloc Z
 
 ShapeZ::ShapeZ() : 
     GraphicsObject(), current_rotation_(0)
@@ -68,6 +72,8 @@ ShapeZ::~ShapeZ()
 // Shape I //
 /////////////
 
+// Fonction pour créer le bloc I
+
 ShapeI::ShapeI() :
     GraphicsObject(), current_rotation_(0)
 {
@@ -98,6 +104,8 @@ ShapeI::~ShapeI()
 /////////////
 // Shape O //
 /////////////
+
+// Fonction pour créer le bloc O
 
 ShapeO::ShapeO(): 
     GraphicsObject(), current_rotation_(0)
@@ -130,6 +138,8 @@ ShapeO::~ShapeO()
 // Shape L //
 /////////////
 
+// Fonction pour créer le bloc L
+
 ShapeL::ShapeL() : 
     GraphicsObject(), current_rotation_(0)
 {
@@ -161,6 +171,8 @@ ShapeL::~ShapeL()
 // Shape J //
 /////////////
 
+// Fonction pour créer le bloc J
+
 ShapeJ::ShapeJ() : 
     GraphicsObject(), current_rotation_(0)
 {
@@ -191,6 +203,8 @@ ShapeJ::~ShapeJ()
 /////////////
 // Shape S //
 /////////////
+
+// Fonction pour créer le bloc S
 
 ShapeS::ShapeS() :
     GraphicsObject(), current_rotation_(0)
