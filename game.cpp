@@ -120,10 +120,6 @@ void Game::initialize()
 
     // bouton play
     sprites_.emplace_back(new Sprite(planche_, 0, 79, sizeButtonPlaySingle, sizeButtonPlaySingle));
-
-    // Game Over 
-    // marche pas je comprends pas pk
-    // sprites_.emplace_back(new Sprite(planche_, 0, 190, 173, 27));
 }
 
 void Game::finalize()
@@ -270,11 +266,11 @@ void Game::drawSingleGame(double dt)
         std::get<1>(pos_cur_bloc) = 0;
 
         need_new_bloc_ = false;
-    }
 
-    if (check_collision(4))
-    {
-        gameOver = true;
+        if (check_collision(4))
+        {
+            gameOver = true;
+        }
     }
 
     // affichage du bloc courant
