@@ -40,8 +40,8 @@ Game::Game()
     gameOver(false),
     compteurSprite(8),
     compteurSpriteNiveau(8),
-    sizeButtonPlaySingle(120),
-    XToCenter(290),
+    sizeButtonPlaySingle(115),
+    XToCenter(318),
     YToCenter(90),
     sprites_()
 
@@ -131,6 +131,15 @@ void Game::initialize()
     
     // Bloc gris/noir
     sprites_.emplace_back(new Sprite(planche_, 160, 0, 12, 18));
+    
+    // Game over
+    sprites_.emplace_back(new Sprite(planche_, 0, 199, 161, 59));
+    
+    // Oui
+    sprites_.emplace_back(new Sprite(planche_, 163, 199, 49, 20));
+    
+    // Non
+    sprites_.emplace_back(new Sprite(planche_, 163, 228, 49, 20));
 }
 
 
@@ -208,7 +217,9 @@ void Game::keyboard(const std::uint8_t *keys)
 // Affichage du bouton play à la fin du gameover
 void Game::drawGameOver(double dt)
 {
-    window_->draw(*sprites_[20], XCoordButtonPlaySingle, YCoordButtonPlaySingle);
+    window_->draw(*sprites_[21], XCoordButtonPlaySingle, YCoordButtonPlaySingle); // game over
+    window_->draw(*sprites_[22], XCoordButtonPlaySingle, YCoordButtonPlaySingle+60); // bouton oui
+    window_->draw(*sprites_[23], XCoordButtonPlaySingle+110, YCoordButtonPlaySingle+60); // bouton non
 }
 
 
@@ -587,9 +598,7 @@ void Game::loop()
         {
             if (gameOver)
             {
-                window_->clear();
-                pdraw = &Game::drawMenu;
-                finalize();
+                pdraw = &Game::drawGameOver;
             }
             switch (event.type)
             {
@@ -598,15 +607,34 @@ void Game::loop()
                     break;
 
                 case SDL_MOUSEBUTTONDOWN:
+                    int diffX = event.button.x - XCoordButtonPlaySingle;
+                    int diffY = event.button.y - YCoordButtonPlaySingle;
                     if (pdraw == &Game::drawMenu)
                     {
-                        int diffX = event.button.x - XCoordButtonPlaySingle;
-                        int diffY = event.button.y - YCoordButtonPlaySingle;
                         if ((diffX > 0) && (diffX < sizeButtonPlaySingle) && (diffY > 0) && (diffY < sizeButtonPlaySingle))
                         {
                             window_->clear();
                             // On affiche le jeu
                             pdraw = &Game::drawSingleGame; 
+                        }
+                    }
+                    if (pdraw == &Game::drawGameOver)
+                    {
+                        // a t'il appuyé sur oui?
+                        diffY -= 60;
+                        if ((diffX > 0) && (diffX < 49) && (diffY > 0) && (diffY < 20))
+                        {
+                            window_->clear();
+                            finalize();
+                            pdraw = &Game::drawSingleGame; 
+                        }
+                        // a t'il appuyé sur non?
+                        diffX -= 110;
+                        if ((diffX > 0) && (diffX < 49) && (diffY > 0) && (diffY < 20))
+                        {
+                            window_->clear();
+                            finalize();
+                            pdraw = &Game::drawMenu; 
                         }
                     }
                 break;
