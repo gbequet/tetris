@@ -44,8 +44,6 @@ Game::Game()
     XToCenter(318),
     YToCenter(90),
     sprites_()
-
-
 {
     // initialisation presenceGrille_
     for (size_t i = 0; i < NB_COL; i++)
@@ -554,7 +552,11 @@ bool Game::check_collision(int situation)
         case 3:
             for (const auto &p : tmpTiles)
             {
-                if ((p.first + std::get<0>(pos_cur_bloc) >= NB_COL) || (p.first + std::get<0>(pos_cur_bloc) < 0) || (p.second + std::get<1>(pos_cur_bloc) >= NB_ROWS))
+                futur_posX = p.first + std::get<0>(pos_cur_bloc);
+                futur_posY = p.second + std::get<1>(pos_cur_bloc);
+                if ((futur_posX >= NB_COL) || (futur_posX < 0) || (futur_posY >= NB_ROWS))
+                    return true;
+                if (presenceGrille_[futur_posX][futur_posY] != 0)
                     return true;
             }
             break;
